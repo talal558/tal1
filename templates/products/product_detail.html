@@ -1,0 +1,67 @@
+{% load static %}
+{% include 'header.html' %}
+
+<style>
+  main {
+    padding: 40px;
+    background-color: #f1f3f5;
+    font-family: 'Segoe UI', Tahoma, 'Amiri', sans-serif;
+  }
+
+  .product-box {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-box img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .product-box h2 {
+    color: #007bff;
+  }
+
+  .product-box p.description {
+    font-size: 17px;
+    color: #555;
+  }
+
+  .product-box p.price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .product-box a.buy-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .product-box a.buy-btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<main>
+  <div class="product-box">
+    <img src="{{ product.image.url }}" alt="{{ product.title }}">
+    <h2>{{ product.title }}</h2>
+    <p class="description">{{ product.description }}</p>
+    <p class="price">💰 {{ product.price }} ريال</p>
+    <a href="#" class="buy-btn">شراء الآن</a>
+  </div>
+</main>
+
+{% include 'footer.html' %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر نور للمنتجات الرقمية</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    header {
+      background: linear-gradient(to left, #3f87a6, #ebf8e1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #1d3557;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛒 متجر نور للمنتجات الرقمية</h1>
+    <nav>
+      <a href="{% url 'home' %}">الرئيسية</a>
+      <a href="{% url 'products:list' %}">المنتجات</a>
+      <a href="{% url 'orders:cart' %}">السلة</a>
+      <a href="{% url 'accounts:login' %}">تسجيل الدخول</a>
+    </nav>
+  </header>
+
+</body>
+</html>

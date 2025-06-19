@@ -1,0 +1,111 @@
+{% load static %}
+{% include 'header.html' %}
+
+<style>
+  main {
+    padding: 40px;
+    background-color: #f7f9fc;
+    font-family: 'Segoe UI', Tahoma, 'Amiri', sans-serif;
+  }
+
+  .cart-title {
+    text-align: center;
+    color: #007bff;
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  table.cart-table {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    border-collapse: collapse;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  table.cart-table thead {
+    background-color: #007bff;
+    color: white;
+  }
+
+  table.cart-table th,
+  table.cart-table td {
+    padding: 15px;
+    text-align: center;
+  }
+
+  table.cart-table a {
+    color: red;
+    text-decoration: none;
+  }
+
+  .cart-summary {
+    max-width: 1000px;
+    margin: 30px auto;
+    text-align: right;
+  }
+
+  .cart-summary p {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .checkout-button {
+    padding: 12px 24px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .checkout-button:hover {
+    background-color: #218838;
+  }
+
+  .no-items {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    margin-top: 50px;
+  }
+</style>
+
+<main>
+  <h2 class="cart-title">🛒 سلة المشتريات</h2>
+
+  {% if cart_items %}
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>المنتج</th>
+          <th>السعر</th>
+          <th>الكمية</th>
+          <th>الإجمالي</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td>{{ item.product.title }}</td>
+          <td>{{ item.product.price }} ر.س</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.total_price }} ر.س</td>
+          <td><a href="{% url 'orders:remove_from_cart' item.id %}">🗑 حذف</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="cart-summary">
+      <p>الإجمالي الكلي: {{ total }} ر.س</p>
+      <a href="{% url 'orders:checkout' %}" class="checkout-button">إتمام الشراء</a>
+    </div>
+  {% else %}
+    <p class="no-items">لا توجد منتجات في السلة حالياً.</p>
+  {% endif %}
+</main>
+
+{% include 'footer.html' %}
