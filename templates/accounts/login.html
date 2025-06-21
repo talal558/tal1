@@ -1,0 +1,15 @@
+{% load static %}
+{% include 'header.html' %}
+
+<!-- ربط ملف التنسيق -->
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+<h2 class="page-title">🔐 تسجيل الدخول</h2>
+
+<form method="post" class="register-form">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">دخول</button>
+</form>
+
+{% include 'footer.html' %}

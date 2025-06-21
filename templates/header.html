@@ -1,55 +1,92 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجر نور للمنتجات الرقمية</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-    }
+{% load static %}
+<header class="main-header">
+  <h1>🛒 متجر همام للمنتجات الرقمية</h1>
+  <nav class="main-nav">
+    <a href="{% url 'home' %}" class="btn-home"><span>الرئيسية</span> 🏠</a>
 
-    header {
-      background: linear-gradient(to left, #3f87a6, #ebf8e1);
-      padding: 20px;
-      text-align: center;
-    }
+    {% if user.is_authenticated %}
+      <span class="user"><span>{{ user.username }}</span> 👤</span>
+      <a href="{% url 'accounts:logout' %}" class="btn-logout"><span>تسجيل الخروج</span> 🚪</a>
+    {% else %}
+      <a href="{% url 'accounts:login' %}" class="btn-login"><span>دخول</span> 🔐</a>
+      <a href="{% url 'accounts:register' %}" class="btn-register"><span>تسجيل</span> 📝</a>
+    {% endif %}
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
+    <a href="{% url 'products:list' %}" class="btn-products"><span>المنتجات</span> 🛍️</a>
+    <a href="{% url 'orders:cart' %}" class="btn-cart"><span>السلة</span> 🧺</a>
+  </nav>
+</header>
 
-    nav {
-      margin-top: 10px;
-    }
+<style>
+  .main-header {
+    background: linear-gradient(to left, #e0f3e5, #a8cfd8);
+    text-align: center;
+    padding: 30px 10px 20px;
+  }
 
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
+  .main-header h1 {
+    margin: 0 0 15px;
+    font-size: 28px;
+    color: #000;
+  }
 
-    nav a:hover {
-      color: #1d3557;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
+  .main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
 
-  <header>
-    <h1>🛒 متجر نور للمنتجات الرقمية</h1>
-    <nav>
-      <a href="{% url 'home' %}">الرئيسية</a>
-      <a href="{% url 'products:list' %}">المنتجات</a>
-      <a href="{% url 'orders:cart' %}">السلة</a>
-      <a href="{% url 'accounts:login' %}">تسجيل الدخول</a>
-    </nav>
-  </header>
+  .main-nav a,
+  .main-nav span.user {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-flex;
+    flex-direction: row-reverse; /* ✅ الأيقونة على اليمين */
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
 
-</body>
-</html>
+  .main-nav a {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #333;
+  }
+
+  .main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+  }
+
+  .main-nav .btn-login {
+    background-color: rgba(0, 123, 255, 0.8);
+    color: white;
+  }
+
+  .main-nav .btn-register {
+    background-color: rgba(40, 167, 69, 0.8);
+    color: white;
+  }
+
+  .main-nav .btn-logout {
+    background-color: rgba(220, 53, 69, 0.8);
+    color: white;
+  }
+
+  .main-nav .btn-products,
+  .main-nav .btn-cart,
+  .main-nav .btn-home {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .main-nav .user {
+    background-color: #fff3cd;
+    color: #333;
+    border: 1px solid #ffeeba;
+    flex-direction: row-reverse; /* ✅ نفس الاتجاه */
+  }
+</style>

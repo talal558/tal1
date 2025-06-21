@@ -1,20 +1,20 @@
 from pathlib import Path
 
-# مسار المشروع الأساسي
+# المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# مفتاح سري (لا تستخدمه في الإنتاج)
+# ⚠️ لا تستخدم هذا المفتاح في الإنتاج — غيّره عند النشر الحقيقي
 SECRET_KEY = 'django-insecure-yv+a!4ov&w22=55eu9g_@z7(*c23xz_5j7p9w--5s-%y(1#o&o'
 
-# وضع التصحيح
+# تفعيل وضع التصحيح في التطوير فقط
 DEBUG = True
 
-# السماح بالاتصال فقط من المضيفين المحددين
+# المضيفون المسموح بهم
 ALLOWED_HOSTS = []
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
-    # تطبيقات Django الافتراضية
+    # تطبيقات Django الأساسية
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -26,9 +26,13 @@ INSTALLED_APPS = [
     'accounts',
     'products',
     'orders',
+
+    # دعم Cloudinary
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
-# إعدادات الوسطاء (Middleware)
+# إعدادات الوسطاء
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -39,17 +43,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# رابط ملف الروابط الرئيسي
+# رابط ملف عناوين المشروع
 ROOT_URLCONF = 'tal1.urls'
 
 # إعدادات القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # ← هنا تعريف مجلد القوالب
+        'DIRS': [BASE_DIR / 'templates'],  # ← مجلد القوالب العام
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -61,7 +66,7 @@ TEMPLATES = [
 # إعداد WSGI
 WSGI_APPLICATION = 'tal1.wsgi.application'
 
-# إعدادات قاعدة البيانات
+# إعداد قاعدة البيانات
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -69,32 +74,37 @@ DATABASES = {
     }
 }
 
-# التحقق من كلمات المرور
+# تحقق كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# اللغة والتوقيت المحلي
+# اللغة والتوقيت
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
 USE_TZ = True
 
-# الملفات الثابتة (CSS/JS/صور)
-STATIC_URL = 'static/'
+# إعداد الملفات الثابتة (CSS/JS)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # ← تأكد أن المجلد موجود فعليًا
+]
 
-# المفتاح الأساسي التلقائي
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# إعداد ملفات الوسائط للمستخدمين (في حالة عدم استخدام Cloudinary)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# إعداد Cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'ddfowkbgi',
+    'API_KEY': '648259561156822',
+    'API_SECRET': 'y4MdtSqSBaLUcO3UXgSvQWtD5pg',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# نوع الحقل الافتراضي للمفاتيح الأساسية
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
