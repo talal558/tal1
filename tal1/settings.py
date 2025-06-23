@@ -1,20 +1,21 @@
 from pathlib import Path
+from decouple import config
+import os
 
 # المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ⚠️ لا تستخدم هذا المفتاح في الإنتاج — غيّره عند النشر الحقيقي
-SECRET_KEY = 'django-insecure-yv+a!4ov&w22=55eu9g_@z7(*c23xz_5j7p9w--5s-%y(1#o&o'
+# سر المشروع (لا تضعه مكشوفًا في الإنتاج)
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-yv+a!4ov&w22=55eu9g_@z7(*c23xz_5j7p9w--5s-%y(1#o&o')
 
-# تفعيل وضع التصحيح في التطوير فقط
-DEBUG = True
+# وضع التصحيح
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # المضيفون المسموح بهم
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
-    # تطبيقات Django الأساسية
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -22,17 +23,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # التطبيقات الخاصة بك
+    # تطبيقات المشروع
     'accounts',
     'products',
     'orders',
 
-    # دعم Cloudinary
+    # Cloudinary
     'cloudinary',
     'cloudinary_storage',
 ]
 
-# إعدادات الوسطاء
+# الوسطاء
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -43,14 +44,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# رابط ملف عناوين المشروع
 ROOT_URLCONF = 'tal1.urls'
 
-# إعدادات القوالب
+# القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # ← مجلد القوالب العام
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,18 +63,31 @@ TEMPLATES = [
     },
 ]
 
-# إعداد WSGI
 WSGI_APPLICATION = 'tal1.wsgi.application'
 
 # إعداد قاعدة البيانات
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    # أثناء التطوير استخدم SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    # عند التشغيل في بيئة الإنتاج استخدم PostgreSQL
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT'),
+        }
+    }
 
-# تحقق كلمات المرور
+# التحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -82,29 +95,27 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# اللغة والتوقيت
+# اللغة والمنطقة الزمنية
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
 USE_TZ = True
 
-# إعداد الملفات الثابتة (CSS/JS)
+# الملفات الثابتة
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # ← تأكد أن المجلد موجود فعليًا
-]
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
-# إعداد ملفات الوسائط للمستخدمين (في حالة عدم استخدام Cloudinary)
+# ملفات الوسائط (إذا لم تستخدم Cloudinary)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# إعداد Cloudinary
+# إعدادات Cloudinary
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'ddfowkbgi',
-    'API_KEY': '648259561156822',
-    'API_SECRET': 'y4MdtSqSBaLUcO3UXgSvQWtD5pg',
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# نوع الحقل الافتراضي للمفاتيح الأساسية
+# المفتاح الافتراضي للحقول
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
