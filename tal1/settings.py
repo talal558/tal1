@@ -5,17 +5,18 @@ import os
 # المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# سر المشروع (لا تضعه مكشوفًا في الإنتاج)
+# المفتاح السري للمشروع
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-yv+a!4ov&w22=55eu9g_@z7(*c23xz_5j7p9w--5s-%y(1#o&o')
 
-# وضع التصحيح
+# وضع التصحيح (تشغيل/تعطيل DEBUG)
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-# المضيفون المسموح بهم
+# المضيفون المسموح لهم (مثلاً في الإنتاج: ['yourdomain.com'])
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
+    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # تطبيقات المشروع
+    # Apps الخاصة بك
     'accounts',
     'products',
     'orders',
@@ -33,7 +34,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
 ]
 
-# الوسطاء
+# ميدلوير
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -44,9 +45,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# رابط URL الجذر
 ROOT_URLCONF = 'tal1.urls'
 
-# القوالب
+# إعداد القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -63,11 +65,12 @@ TEMPLATES = [
     },
 ]
 
+# إعداد WSGI
 WSGI_APPLICATION = 'tal1.wsgi.application'
 
 # إعداد قاعدة البيانات
 if DEBUG:
-    # أثناء التطوير استخدم SQLite
+    # قاعدة بيانات التطوير
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -75,7 +78,7 @@ if DEBUG:
         }
     }
 else:
-    # عند التشغيل في بيئة الإنتاج استخدم PostgreSQL
+    # قاعدة بيانات الإنتاج (PostgreSQL)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -87,7 +90,7 @@ else:
         }
     }
 
-# التحقق من كلمات المرور
+# تحقق كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -95,17 +98,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# اللغة والمنطقة الزمنية
+# اللغة والتوقيت
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
 USE_TZ = True
 
-# الملفات الثابتة
+# إعدادات الملفات الثابتة
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-# ملفات الوسائط (إذا لم تستخدم Cloudinary)
+# إعداد ملفات الوسائط (في حال عدم استخدام Cloudinary)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -117,5 +120,5 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# المفتاح الافتراضي للحقول
+# نوع الحقل الافتراضي للمفاتيح
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

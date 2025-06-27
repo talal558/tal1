@@ -1,10 +1,22 @@
-from django.urls import path
-from . import views
-
-app_name = 'orders'
+from django.contrib import admin
+from django.urls import path, include
+from products.views import product_list  # ← العرض الرئيسي للصفحة
 
 urlpatterns = [
-    path('cart/', views.cart_view, name='cart'),
-    path('checkout/', views.checkout_view, name='checkout'),
-    path('order/<int:order_id>/', views.order_detail_view, name='order_detail'),
+    # لوحة التحكم الإدارية
+    path('admin/', admin.site.urls),
+
+    # الصفحة الرئيسية تعرض قائمة المنتجات
+    path('', product_list, name='home'),
+
+    # روابط التطبيقات بمسارات فرعية
+    path('products/', include(('products.urls', 'products'), namespace='products')),
+    path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    path('orders/', include(('orders.urls', 'orders'), namespace='orders')),
 ]
+
+# دعم تحميل ملفات الوسائط (صور/مرفقات)
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
