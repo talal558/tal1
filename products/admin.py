@@ -18,6 +18,8 @@ class ProductAdmin(admin.ModelAdmin):
 
     def display_image(self, obj):
         if obj.image:
+            # عرض اسم ملف الصورة فقط بدون رابط أو HTML
             return f"📷 {obj.image.name.split('/')[-1]}"
         return "لا توجد صورة"
+
     display_image.short_description = 'صورة المنتج'

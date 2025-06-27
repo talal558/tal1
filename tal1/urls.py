@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from products.views import product_list  # ← العرض الرئيسي للصفحة
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # لوحة التحكم الإدارية
@@ -15,8 +17,7 @@ urlpatterns = [
     path('orders/', include(('orders.urls', 'orders'), namespace='orders')),
 ]
 
-# دعم تحميل ملفات الوسائط (صور/مرفقات)
-from django.conf import settings
-from django.conf.urls.static import static
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# دعم تحميل ملفات الوسائط (صور/مرفقات) في بيئة التطوير فقط
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

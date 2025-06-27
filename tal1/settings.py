@@ -1,22 +1,21 @@
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 import os
 
 # المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# المفتاح السري للمشروع
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-yv+a!4ov&w22=55eu9g_@z7(*c23xz_5j7p9w--5s-%y(1#o&o')
+# المفتاح السري للمشروع (يجب تغييره في الإنتاج)
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-dummy-key')
 
-# وضع التصحيح (تشغيل/تعطيل DEBUG)
+# وضع التصحيح
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-# المضيفون المسموح لهم (مثلاً في الإنتاج: ['yourdomain.com'])
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+# المضيفون المسموح بهم
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
-    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -24,12 +23,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Apps الخاصة بك
+    # التطبيقات المحلية
     'accounts',
     'products',
     'orders',
 
-    # Cloudinary
+    # خدمات التخزين السحابي
     'cloudinary',
     'cloudinary_storage',
 ]
@@ -45,10 +44,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# رابط URL الجذر
 ROOT_URLCONF = 'tal1.urls'
 
-# إعداد القوالب
+# القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -65,12 +63,10 @@ TEMPLATES = [
     },
 ]
 
-# إعداد WSGI
 WSGI_APPLICATION = 'tal1.wsgi.application'
 
-# إعداد قاعدة البيانات
+# قاعدة البيانات
 if DEBUG:
-    # قاعدة بيانات التطوير
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -78,7 +74,6 @@ if DEBUG:
         }
     }
 else:
-    # قاعدة بيانات الإنتاج (PostgreSQL)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -90,7 +85,7 @@ else:
         }
     }
 
-# تحقق كلمات المرور
+# تحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -98,27 +93,28 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# اللغة والتوقيت
+# اللغة والمنطقة الزمنية
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
 USE_TZ = True
 
-# إعدادات الملفات الثابتة
+# الملفات الثابتة
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# إعداد ملفات الوسائط (في حال عدم استخدام Cloudinary)
+# الوسائط
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# إعدادات Cloudinary
+# إعداد Cloudinary للتخزين السحابي
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': config('CLOUDINARY_API_KEY'),
-    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='your_cloud_name'),
+    'API_KEY': config('CLOUDINARY_API_KEY', default='your_api_key'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET', default='your_api_secret'),
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# نوع الحقل الافتراضي للمفاتيح
+# الحقول التلقائية
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -9,6 +9,7 @@ class Category(models.Model):
         verbose_name_plural = "الأقسام"
 
     def __str__(self):
+        # إرجاع اسم القسم فقط
         return self.name
 
 
@@ -17,7 +18,12 @@ class Product(models.Model):
     description = models.TextField("وصف المنتج")
     price = models.DecimalField("السعر", max_digits=8, decimal_places=2)
     image = models.ImageField("صورة المنتج", upload_to='products/')
-    category = models.ForeignKey(Category, verbose_name="القسم", on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category,
+        verbose_name="القسم",
+        on_delete=models.CASCADE,
+        related_name='products'
+    )
 
     class Meta:
         verbose_name = "منتج"
