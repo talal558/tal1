@@ -5,10 +5,10 @@ import os
 # المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# المفتاح السري للمشروع (يجب تغييره في الإنتاج)
+# مفتاح التشفير السري
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dummy-key')
 
-# وضع التصحيح
+# وضع التصحيح (True للتطوير / False للإنتاج)
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # المضيفون المسموح بهم
@@ -16,6 +16,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv(
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
+    # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,17 +24,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # التطبيقات المحلية
+    # تطبيقات محلية
     'accounts',
     'products',
     'orders',
 
-    # خدمات التخزين السحابي
+    # تخزين سحابي عبر Cloudinary
     'cloudinary',
     'cloudinary_storage',
 ]
 
-# ميدلوير
+# الميدلوير
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,7 +66,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tal1.wsgi.application'
 
-# قاعدة البيانات
+# قاعدة البيانات (SQLite في التطوير - PostgreSQL في الإنتاج)
 if DEBUG:
     DATABASES = {
         'default': {
@@ -93,22 +94,23 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# اللغة والمنطقة الزمنية
+# الإعدادات الدولية
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
-# الملفات الثابتة
+# إعدادات الملفات الثابتة
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# الوسائط
+# إعدادات الوسائط
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# إعداد Cloudinary للتخزين السحابي
+# إعدادات Cloudinary
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='your_cloud_name'),
     'API_KEY': config('CLOUDINARY_API_KEY', default='your_api_key'),

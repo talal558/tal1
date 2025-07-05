@@ -1,33 +1,64 @@
 {% load static %}
+
 <header class="main-header">
-  <h1>🛒 متجر همام للمنتجات الرقمية</h1>
-  <nav class="main-nav">
-    <a href="{% url 'home' %}" class="btn-home"><span>الرئيسية</span> 🏠</a>
+  <video autoplay muted loop class="header-video">
+    <source src="{% static 'videos/header_bg.mp4' %}" type="video/mp4">
+    المتصفح لا يدعم تشغيل الفيديو.
+  </video>
 
-    {% if user.is_authenticated %}
-      <span class="user"><span>{{ user.username }}</span> 👤</span>
-      <a href="{% url 'accounts:logout' %}" class="btn-logout"><span>تسجيل الخروج</span> 🚪</a>
-    {% else %}
-      <a href="{% url 'accounts:login' %}" class="btn-login"><span>دخول</span> 🔐</a>
-      <a href="{% url 'accounts:register' %}" class="btn-register"><span>تسجيل</span> 📝</a>
-    {% endif %}
+  <div class="header-content">
+    <h1 class="site-title">منصة الكود سعودي لبيع المنتجات الرقمية</h1>
 
-    <a href="{% url 'products:list' %}" class="btn-products"><span>المنتجات</span> 🛍️</a>
-    <a href="{% url 'orders:cart' %}" class="btn-cart"><span>السلة</span> 🧺</a>
-  </nav>
+    <nav class="main-nav">
+      <a href="{% url 'home' %}" class="nav-btn">الرئيسية <span class="icon">🏠</span></a>
+
+      {% if user.is_authenticated %}
+        <span class="nav-btn user-badge">{{ user.username }} <span class="icon">👤</span></span>
+        <a href="{% url 'accounts:logout' %}" class="nav-btn logout">تسجيل الخروج <span class="icon">🚪</span></a>
+      {% else %}
+        <a href="{% url 'accounts:login' %}" class="nav-btn login">دخول <span class="icon">🔐</span></a>
+        <a href="{% url 'accounts:register' %}" class="nav-btn register">تسجيل <span class="icon">📝</span></a>
+      {% endif %}
+
+      <a href="{% url 'products:list' %}" class="nav-btn">المنتجات <span class="icon">🛍️</span></a>
+      <a href="{% url 'orders:cart' %}" class="nav-btn">السلة <span class="icon">🧺</span></a>
+    </nav>
+  </div>
 </header>
 
 <style>
   .main-header {
-    background: linear-gradient(to left, #e0f3e5, #a8cfd8);
-    text-align: center;
-    padding: 30px 10px 20px;
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
   }
 
-  .main-header h1 {
-    margin: 0 0 15px;
-    font-size: 28px;
+  .header-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 30px 15px;
+  }
+
+  .site-title {
+    font-size: 26px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 12px 24px;
+    border-radius: 10px;
     color: #000;
+    margin-bottom: 20px;
+    display: inline-block;
+    font-weight: bold;
   }
 
   .main-nav {
@@ -35,58 +66,48 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
+    direction: rtl;
   }
 
-  .main-nav a,
-  .main-nav span.user {
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 10px;
+  .nav-btn {
     display: inline-flex;
-    flex-direction: row-reverse; /* ✅ الأيقونة على اليمين */
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    padding: 10px 18px;
     font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid #ccc;
     transition: 0.3s ease-in-out;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  }
-
-  .main-nav a {
-    background-color: rgba(255, 255, 255, 0.7);
-    color: #333;
-  }
-
-  .main-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #000;
-  }
-
-  .main-nav .btn-login {
-    background-color: rgba(0, 123, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
   }
 
-  .main-nav .btn-register {
-    background-color: rgba(40, 167, 69, 0.8);
-    color: white;
+  .nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    transform: scale(1.05);
   }
 
-  .main-nav .btn-logout {
-    background-color: rgba(220, 53, 69, 0.8);
-    color: white;
+  .nav-btn .icon {
+    font-size: 18px;
   }
 
-  .main-nav .btn-products,
-  .main-nav .btn-cart,
-  .main-nav .btn-home {
-    background-color: rgba(255, 255, 255, 0.6);
+  .login {
+    background-color: #007bff;
   }
 
-  .main-nav .user {
+  .register {
+    background-color: #28a745;
+  }
+
+  .logout {
+    background-color: #dc3545;
+  }
+
+  .user-badge {
     background-color: #fff3cd;
-    color: #333;
+    color: #000;
     border: 1px solid #ffeeba;
-    flex-direction: row-reverse; /* ✅ نفس الاتجاه */
   }
 </style>

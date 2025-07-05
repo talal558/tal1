@@ -1,0 +1,86 @@
+/* تصميم رأس الموقع */
+.main-header {
+  background: linear-gradient(to left, #e0f3e5, #a8cfd8);
+  text-align: center;
+  padding: 30px 10px 20px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.logo-container img {
+  width: 50px;
+  height: auto;
+}
+
+.logo-container h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #000;
+}
+
+/* التنقل العلوي */
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.main-nav a,
+.main-nav span.user {
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.main-nav a {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #333;
+}
+
+.main-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+}
+
+.main-nav .btn-login {
+  background-color: rgba(0, 123, 255, 0.8);
+  color: white;
+}
+
+.main-nav .btn-register {
+  background-color: rgba(40, 167, 69, 0.8);
+  color: white;
+}
+
+.main-nav .btn-logout {
+  background-color: rgba(220, 53, 69, 0.8);
+  color: white;
+}
+
+.main-nav .btn-products,
+.main-nav .btn-cart,
+.main-nav .btn-home {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.main-nav .user {
+  background-color: #fff3cd;
+  color: #333;
+  border: 1px solid #ffeeba;
+  flex-direction: row-reverse;
+}
