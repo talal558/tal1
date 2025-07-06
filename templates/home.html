@@ -14,17 +14,20 @@
     background: linear-gradient(to left, #3f87a6, #ebf8e1);
     padding: 50px 20px;
     border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
   }
 
   .hero h2 {
     font-size: 36px;
     margin-bottom: 10px;
+    font-weight: bold;
   }
 
   .hero p {
     font-size: 20px;
     max-width: 600px;
     margin: auto;
+    color: #333;
   }
 
   .hero a {
@@ -37,6 +40,7 @@
     text-decoration: none;
     font-size: 18px;
     transition: background-color 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   }
 
   .hero a:hover {
@@ -57,6 +61,45 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .category-box:hover {
+    transform: translateY(-5px);
+  }
+
+  .category-box h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .category-box p {
+    font-size: 16px;
+    color: #555;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 30px 15px;
+    }
+
+    .hero h2 {
+      font-size: 28px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .hero a {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+
+    .category-box {
+      width: 100%;
+      max-width: 320px;
+    }
   }
 </style>
 
@@ -84,5 +127,3 @@
     </div>
   </section>
 </main>
-
-{% include 'footer.html' %}

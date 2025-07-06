@@ -1,11 +1,20 @@
+<!-- ملف: templates/footer.html -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <style>
   footer {
-    background-color: #333;
-    color: white;
-    padding: 20px;
+    background-color: #222;
+    color: #eee;
+    padding: 25px 15px;
     text-align: center;
     margin-top: 60px;
     font-family: 'Segoe UI', Tahoma, 'Amiri', sans-serif;
+    border-top: 1px solid #444;
+  }
+
+  footer p {
+    margin: 10px 0;
+    font-size: 15px;
   }
 
   footer a {
@@ -18,9 +27,33 @@
     color: #fff;
     text-decoration: underline;
   }
+
+  footer .social-icons {
+    margin-top: 12px;
+  }
+
+  footer .social-icons a {
+    margin: 0 8px;
+    font-size: 20px;
+    color: #ccc;
+    transition: color 0.3s ease;
+  }
+
+  footer .social-icons a:hover {
+    color: #fff;
+  }
 </style>
 
 <footer>
-  <p>جميع الحقوق محفوظة &copy; 2025 - متجر نور الرقمي</p>
-  <p><a href="mailto:support@noordigital.com">📧 تواصل معنا</a></p>
+  <p>جميع الحقوق محفوظة &copy; 2025 - منصة الكود سعودي</p>
+
+  <p>
+    <a href="mailto:support@saudicode.com" title="راسلنا عبر البريد">📧 تواصل معنا عبر البريد</a>
+  </p>
+
+  <div class="social-icons">
+    <a href="https://twitter.com/saudicode" target="_blank" rel="noopener" title="تويتر"><i class="fab fa-twitter"></i></a>
+    <a href="https://t.me/saudicode" target="_blank" rel="noopener" title="تليجرام"><i class="fab fa-telegram"></i></a>
+    <a href="https://wa.me/966500000000" target="_blank" rel="noopener" title="واتساب"><i class="fab fa-whatsapp"></i></a>
+  </div>
 </footer>
