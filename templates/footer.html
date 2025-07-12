@@ -1,59 +1,100 @@
-<!-- ملف: templates/footer.html -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% load static %}
 
-<style>
-  footer {
-    background-color: #222;
-    color: #eee;
-    padding: 25px 15px;
-    text-align: center;
-    margin-top: 60px;
-    font-family: 'Segoe UI', Tahoma, 'Amiri', sans-serif;
-    border-top: 1px solid #444;
-  }
-
-  footer p {
-    margin: 10px 0;
-    font-size: 15px;
-  }
-
-  footer a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  footer a:hover {
-    color: #fff;
-    text-decoration: underline;
-  }
-
-  footer .social-icons {
-    margin-top: 12px;
-  }
-
-  footer .social-icons a {
-    margin: 0 8px;
-    font-size: 20px;
-    color: #ccc;
-    transition: color 0.3s ease;
-  }
-
-  footer .social-icons a:hover {
-    color: #fff;
-  }
-</style>
-
-<footer>
-  <p>جميع الحقوق محفوظة &copy; 2025 - منصة الكود سعودي</p>
-
-  <p>
-    <a href="mailto:support@saudicode.com" title="راسلنا عبر البريد">📧 تواصل معنا عبر البريد</a>
-  </p>
-
-  <div class="social-icons">
-    <a href="https://twitter.com/saudicode" target="_blank" rel="noopener" title="تويتر"><i class="fab fa-twitter"></i></a>
-    <a href="https://t.me/saudicode" target="_blank" rel="noopener" title="تليجرام"><i class="fab fa-telegram"></i></a>
-    <a href="https://wa.me/966500000000" target="_blank" rel="noopener" title="واتساب"><i class="fab fa-whatsapp"></i></a>
+<footer class="main-footer">
+  <div class="footer-content">
+    <p class="footer-title">منصة الكود سعودي لبيع المنتجات الرقمية</p>
+    <nav class="footer-nav">
+      <a href="{% url 'home' %}" class="footer-btn"><i class="fas fa-home icon"></i> الرئيسية</a>
+      <a href="{% url 'products:list' %}" class="footer-btn"><i class="fas fa-box-open icon"></i> المنتجات</a>
+      <a href="{% url 'accounts:login' %}" class="footer-btn login"><i class="fas fa-lock icon"></i> دخول</a>
+      <a href="{% url 'accounts:register' %}" class="footer-btn register"><i class="fas fa-user-plus icon"></i> تسجيل</a>
+      <a href="{% url 'orders:cart' %}" class="footer-btn"><i class="fas fa-shopping-cart icon"></i> السلة</a>
+    </nav>
+    <p class="copy">© جميع الحقوق محفوظة 2025</p>
   </div>
+
+  <style>
+    footer.main-footer {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 20px 20px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .footer-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .footer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 15px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .footer-btn:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    .footer-btn .icon {
+      font-size: 16px;
+    }
+
+    .login {
+      background-color: #007bff;
+    }
+
+    .login:hover {
+      background-color: #0056b3;
+    }
+
+    .register {
+      background-color: #28a745;
+    }
+
+    .register:hover {
+      background-color: #218838;
+    }
+
+    .copy {
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .footer-btn {
+        font-size: 14px;
+        padding: 10px 14px;
+      }
+
+      .footer-title {
+        font-size: 18px;
+      }
+    }
+  </style>
 </footer>
