@@ -1,26 +1,100 @@
-<style>
-  footer {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    margin-top: 60px;
-    font-family: 'Segoe UI', Tahoma, 'Amiri', sans-serif;
-  }
+{% load static %}
 
-  footer a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
+<footer class="main-footer">
+  <div class="footer-content">
+    <p class="footer-title">منصة الكود سعودي لبيع المنتجات الرقمية</p>
+    <nav class="footer-nav">
+      <a href="{% url 'home' %}" class="footer-btn"><i class="fas fa-home icon"></i> الرئيسية</a>
+      <a href="{% url 'products:list' %}" class="footer-btn"><i class="fas fa-box-open icon"></i> المنتجات</a>
+      <a href="{% url 'accounts:login' %}" class="footer-btn login"><i class="fas fa-lock icon"></i> دخول</a>
+      <a href="{% url 'accounts:register' %}" class="footer-btn register"><i class="fas fa-user-plus icon"></i> تسجيل</a>
+      <a href="{% url 'orders:cart' %}" class="footer-btn"><i class="fas fa-shopping-cart icon"></i> السلة</a>
+    </nav>
+    <p class="copy">© جميع الحقوق محفوظة 2025</p>
+  </div>
 
-  footer a:hover {
-    color: #fff;
-    text-decoration: underline;
-  }
-</style>
+  <style>
+    footer.main-footer {
+      background-color: #222;
+      color: #fff;
+      padding: 40px 20px 20px;
+      text-align: center;
+      margin-top: auto;
+    }
 
-<footer>
-  <p>جميع الحقوق محفوظة &copy; 2025 - متجر نور الرقمي</p>
-  <p><a href="mailto:support@noordigital.com">📧 تواصل معنا</a></p>
+    .footer-content {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .footer-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .footer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 15px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .footer-btn:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    .footer-btn .icon {
+      font-size: 16px;
+    }
+
+    .login {
+      background-color: #007bff;
+    }
+
+    .login:hover {
+      background-color: #0056b3;
+    }
+
+    .register {
+      background-color: #28a745;
+    }
+
+    .register:hover {
+      background-color: #218838;
+    }
+
+    .copy {
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .footer-btn {
+        font-size: 14px;
+        padding: 10px 14px;
+      }
+
+      .footer-title {
+        font-size: 18px;
+      }
+    }
+  </style>
 </footer>
