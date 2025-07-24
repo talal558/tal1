@@ -3,74 +3,70 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <title>منصة الكود سعودي</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصة الكود سعودي لبيع المنتجات الرقمية</title>
 
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Cairo', sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
       direction: rtl;
-      margin: 0;
     }
 
     header.main-header {
       position: relative;
-      width: 100%;
-      height: 320px;
+      height: 350px;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #fff;
       text-align: center;
     }
 
     .header-video {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: brightness(40%);
       z-index: 1;
+    }
+
+    .header-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 2;
     }
 
     .header-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
+      color: white;
       padding: 20px;
     }
 
     .site-title {
+      font-size: 30px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 34px;
       font-weight: bold;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 12px 30px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px 25px;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       display: inline-block;
     }
 
-    nav.main-nav {
+    .main-nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -81,72 +77,58 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 22px;
-      font-size: 16px;
+      padding: 10px 18px;
+      font-size: 15px;
       font-weight: bold;
-      border-radius: 10px;
-      text-decoration: none;
       color: white;
-      background-color: rgba(0, 0, 0, 0.75);
-      transition: all 0.3s ease;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: 0.3s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .nav-btn:hover {
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0,0,0,0.85);
+      color: #00bcd4;
       transform: scale(1.05);
     }
 
-    .nav-btn .icon {
-      font-size: 18px;
-    }
+    .nav-btn.login    { background-color: #007bff; }
+    .nav-btn.login:hover { background-color: #0056b3; }
 
-    .login {
-      background-color: #007bff;
-    }
+    .nav-btn.register { background-color: #28a745; }
+    .nav-btn.register:hover { background-color: #218838; }
 
-    .login:hover {
-      background-color: #0056b3;
-    }
+    .nav-btn.cart     { background-color: #6f42c1; }
+    .nav-btn.cart:hover { background-color: #4e2a9b; }
 
-    .register {
-      background-color: #28a745;
-    }
-
-    .register:hover {
-      background-color: #218838;
-    }
-
-    @media (max-width: 768px) {
-      .site-title {
-        font-size: 26px;
-        padding: 10px 20px;
-      }
-
-      .nav-btn {
-        font-size: 15px;
-        padding: 10px 16px;
-      }
+    .icon {
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
 
-<header class="main-header">
-  <video autoplay muted loop playsinline webkit-playsinline class="header-video" poster="{% static 'images/header_bg_fallback.jpg' %}">
-    <source src="{% static 'videos/header_bg.mp4' %}" type="video/mp4">
-    متصفحك لا يدعم تشغيل الفيديو.
-  </video>
-  <div class="header-content">
-    <h1 class="site-title">منصة الكود سعودي لبيع المنتجات الرقمية</h1>
-    <nav class="main-nav">
-      <a href="{% url 'home' %}" class="nav-btn">الرئيسية <i class="fas fa-home icon"></i></a>
-      <a href="{% url 'accounts:login' %}" class="nav-btn login">دخول <i class="fas fa-lock icon"></i></a>
-      <a href="{% url 'accounts:register' %}" class="nav-btn register">تسجيل <i class="fas fa-user-plus icon"></i></a>
-      <a href="{% url 'products:list' %}" class="nav-btn">المنتجات <i class="fas fa-box-open icon"></i></a>
-      <a href="{% url 'orders:cart' %}" class="nav-btn">السلة <i class="fas fa-shopping-cart icon"></i></a>
-    </nav>
-  </div>
-</header>
+  <header class="main-header">
+    <video autoplay muted loop class="header-video" poster="{% static 'images/header_bg_fallback.jpg' %}">
+      <source src="{% static 'videos/header_bg.mp4' %}" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    <div class="header-overlay"></div>
+    <div class="header-content">
+      <h1 class="site-title">منصة الكود سعودي لبيع المنتجات الرقمية</h1>
+      <nav class="main-nav">
+        <a href="{% url 'home' %}" class="nav-btn"><i class="fas fa-home icon"></i><span>الرئيسية</span></a>
+        <a href="{% url 'accounts:login' %}" class="nav-btn login"><i class="fas fa-lock icon"></i><span>دخول</span></a>
+        <a href="{% url 'accounts:register' %}" class="nav-btn register"><i class="fas fa-user-plus icon"></i><span>تسجيل</span></a>
+        <a href="{% url 'products:list' %}" class="nav-btn"><i class="fas fa-box-open icon"></i><span>المنتجات</span></a>
+        <a href="{% url 'orders:cart' %}" class="nav-btn cart"><i class="fas fa-shopping-cart icon"></i><span>السلة</span></a>
+      </nav>
+    </div>
+  </header>
 
 </body>
 </html>

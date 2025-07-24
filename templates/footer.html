@@ -1,100 +1,78 @@
 {% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+  .main-footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  .footer-content {
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .footer-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .contact-info {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+  }
+
+  .contact-info li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .social-icons {
+    margin-bottom: 20px;
+  }
+
+  .social-icons .icon {
+    color: white;
+    font-size: 18px;
+    margin: 0 10px;
+    transition: color 0.3s;
+    text-decoration: none;
+  }
+
+  .social-icons .icon:hover {
+    color: #00bcd4;
+  }
+
+  .copy {
+    font-size: 14px;
+    color: #ccc;
+  }
+</style>
 
 <footer class="main-footer">
   <div class="footer-content">
     <p class="footer-title">منصة الكود سعودي لبيع المنتجات الرقمية</p>
-    <nav class="footer-nav">
-      <a href="{% url 'home' %}" class="footer-btn"><i class="fas fa-home icon"></i> الرئيسية</a>
-      <a href="{% url 'products:list' %}" class="footer-btn"><i class="fas fa-box-open icon"></i> المنتجات</a>
-      <a href="{% url 'accounts:login' %}" class="footer-btn login"><i class="fas fa-lock icon"></i> دخول</a>
-      <a href="{% url 'accounts:register' %}" class="footer-btn register"><i class="fas fa-user-plus icon"></i> تسجيل</a>
-      <a href="{% url 'orders:cart' %}" class="footer-btn"><i class="fas fa-shopping-cart icon"></i> السلة</a>
-    </nav>
+
+    <ul class="contact-info">
+      <li><i class="fas fa-map-marker-alt"></i> الرياض - المملكة العربية السعودية</li>
+      <li><i class="fas fa-envelope"></i> support@saudicodes.com</li>
+      <li><i class="fas fa-phone"></i> +966-594100055</li>
+      <li><i class="fas fa-globe"></i> www.saudicodes.com</li>
+    </ul>
+
+    <div class="social-icons">
+      <a href="#" class="icon" title="تويتر"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="icon" title="فيسبوك"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="icon" title="إنستغرام"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="icon" title="لينكدإن"><i class="fab fa-linkedin"></i></a>
+    </div>
+
     <p class="copy">© جميع الحقوق محفوظة 2025</p>
   </div>
-
-  <style>
-    footer.main-footer {
-      background-color: #222;
-      color: #fff;
-      padding: 40px 20px 20px;
-      text-align: center;
-      margin-top: auto;
-    }
-
-    .footer-content {
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .footer-title {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .footer-nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .footer-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      font-size: 15px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .footer-btn:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      transform: scale(1.05);
-    }
-
-    .footer-btn .icon {
-      font-size: 16px;
-    }
-
-    .login {
-      background-color: #007bff;
-    }
-
-    .login:hover {
-      background-color: #0056b3;
-    }
-
-    .register {
-      background-color: #28a745;
-    }
-
-    .register:hover {
-      background-color: #218838;
-    }
-
-    .copy {
-      font-size: 14px;
-      color: #ccc;
-      margin-top: 15px;
-    }
-
-    @media (max-width: 768px) {
-      .footer-btn {
-        font-size: 14px;
-        padding: 10px 14px;
-      }
-
-      .footer-title {
-        font-size: 18px;
-      }
-    }
-  </style>
 </footer>
