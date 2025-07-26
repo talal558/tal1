@@ -1,100 +1,97 @@
-{% load static %}
-
+<!-- footer.html -->
 <footer class="main-footer">
-  <div class="footer-content">
-    <p class="footer-title">منصة الكود سعودي لبيع المنتجات الرقمية</p>
-    <nav class="footer-nav">
-      <a href="{% url 'home' %}" class="footer-btn"><i class="fas fa-home icon"></i> الرئيسية</a>
-      <a href="{% url 'products:list' %}" class="footer-btn"><i class="fas fa-box-open icon"></i> المنتجات</a>
-      <a href="{% url 'accounts:login' %}" class="footer-btn login"><i class="fas fa-lock icon"></i> دخول</a>
-      <a href="{% url 'accounts:register' %}" class="footer-btn register"><i class="fas fa-user-plus icon"></i> تسجيل</a>
-      <a href="{% url 'orders:cart' %}" class="footer-btn"><i class="fas fa-shopping-cart icon"></i> السلة</a>
-    </nav>
-    <p class="copy">© جميع الحقوق محفوظة 2025</p>
+  <div class="footer-container">
+    <h2 class="footer-title">منصة الكود سعودي لبيع المنتجات الرقمية</h2>
+
+    <ul class="footer-contact">
+      <li><i class="fas fa-map-marker-alt"></i> الأحساء - المملكة العربية السعودية</li>
+      <li><i class="fas fa-envelope"></i> <a href="mailto:saudicode586@gmail.com">saudicode586@gmail.com</a></li>
+      <li><i class="fas fa-phone"></i> <a href="tel:+966594100055">+966-594100055</a></li>
+      <li><i class="fas fa-globe"></i> <a href="https://www.saudicodes.com" target="_blank" rel="noopener noreferrer">www.saudicodes.com</a></li>
+    </ul>
+
+    <div class="footer-social">
+      <a href="https://wa.me/966594100055" target="_blank" title="واتساب" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://t.me/saudicode586" target="_blank" title="تيليجرام" rel="noopener noreferrer"><i class="fab fa-telegram-plane"></i></a>
+      <a href="https://www.snapchat.com/add/saudicode586" target="_blank" title="سناب شات" rel="noopener noreferrer"><i class="fab fa-snapchat-ghost"></i></a>
+      <a href="https://www.tiktok.com/@saudicode586" target="_blank" title="تيك توك" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.instagram.com/saudicode586" target="_blank" title="انستقرام" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/saudicode586" target="_blank" title="لينكدإن" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://twitter.com/saudicode58" target="_blank" title="تويتر" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+    </div>
+
+    <p class="footer-copy">© جميع الحقوق محفوظة 2025</p>
   </div>
-
-  <style>
-    footer.main-footer {
-      background-color: #222;
-      color: #fff;
-      padding: 40px 20px 20px;
-      text-align: center;
-      margin-top: auto;
-    }
-
-    .footer-content {
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .footer-title {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .footer-nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .footer-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      font-size: 15px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .footer-btn:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      transform: scale(1.05);
-    }
-
-    .footer-btn .icon {
-      font-size: 16px;
-    }
-
-    .login {
-      background-color: #007bff;
-    }
-
-    .login:hover {
-      background-color: #0056b3;
-    }
-
-    .register {
-      background-color: #28a745;
-    }
-
-    .register:hover {
-      background-color: #218838;
-    }
-
-    .copy {
-      font-size: 14px;
-      color: #ccc;
-      margin-top: 15px;
-    }
-
-    @media (max-width: 768px) {
-      .footer-btn {
-        font-size: 14px;
-        padding: 10px 14px;
-      }
-
-      .footer-title {
-        font-size: 18px;
-      }
-    }
-  </style>
 </footer>
+
+<!-- روابط الأيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
+<style>
+  .main-footer {
+    background-color: #222;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+  }
+
+  .footer-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    line-height: 1.8;
+  }
+
+  .footer-contact li i {
+    margin-left: 8px;
+    color: #00bcd4;
+  }
+
+  .footer-contact a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .footer-contact a:hover {
+    text-decoration: underline;
+    color: #00bcd4;
+  }
+
+  .footer-social {
+    margin: 20px 0;
+  }
+
+  .footer-social a {
+    display: inline-block;
+    margin: 0 8px;
+    font-size: 18px;
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+
+  .footer-social a:hover {
+    color: #00bcd4;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    margin-top: 10px;
+    color: #aaa;
+  }
+
+  @media (max-width: 600px) {
+    .footer-title { font-size: 18px; }
+    .footer-contact { font-size: 13px; }
+    .footer-social a { font-size: 16px; }
+  }
+</style>
