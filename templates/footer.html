@@ -1,78 +1,97 @@
-{% load static %}
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- footer.html -->
+<footer class="main-footer">
+  <div class="footer-container">
+    <h2 class="footer-title">منصة الكود سعودي لبيع المنتجات الرقمية</h2>
+
+    <ul class="footer-contact">
+      <li><i class="fas fa-map-marker-alt"></i> الأحساء - المملكة العربية السعودية</li>
+      <li><i class="fas fa-envelope"></i> <a href="mailto:saudicode586@gmail.com">saudicode586@gmail.com</a></li>
+      <li><i class="fas fa-phone"></i> <a href="tel:+966594100055">+966-594100055</a></li>
+      <li><i class="fas fa-globe"></i> <a href="https://www.saudicodes.com" target="_blank" rel="noopener noreferrer">www.saudicodes.com</a></li>
+    </ul>
+
+    <div class="footer-social">
+      <a href="https://wa.me/966594100055" target="_blank" title="واتساب" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://t.me/saudicode586" target="_blank" title="تيليجرام" rel="noopener noreferrer"><i class="fab fa-telegram-plane"></i></a>
+      <a href="https://www.snapchat.com/add/saudicode586" target="_blank" title="سناب شات" rel="noopener noreferrer"><i class="fab fa-snapchat-ghost"></i></a>
+      <a href="https://www.tiktok.com/@saudicode586" target="_blank" title="تيك توك" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.instagram.com/saudicode586" target="_blank" title="انستقرام" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/saudicode586" target="_blank" title="لينكدإن" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://twitter.com/saudicode58" target="_blank" title="تويتر" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+    </div>
+
+    <p class="footer-copy">© جميع الحقوق محفوظة 2025</p>
+  </div>
+</footer>
+
+<!-- روابط الأيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 
 <style>
   .main-footer {
     background-color: #222;
-    color: white;
+    color: #fff;
+    padding: 30px 20px;
     text-align: center;
-    padding: 40px 20px;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3);
     font-family: 'Cairo', sans-serif;
-  }
-
-  .footer-content {
-    max-width: 800px;
-    margin: auto;
+    font-size: 14px;
   }
 
   .footer-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
-  .contact-info {
+  .footer-contact {
     list-style: none;
     padding: 0;
     margin: 0 0 20px;
+    line-height: 1.8;
   }
 
-  .contact-info li {
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-
-  .social-icons {
-    margin-bottom: 20px;
-  }
-
-  .social-icons .icon {
-    color: white;
-    font-size: 18px;
-    margin: 0 10px;
-    transition: color 0.3s;
-    text-decoration: none;
-  }
-
-  .social-icons .icon:hover {
+  .footer-contact li i {
+    margin-left: 8px;
     color: #00bcd4;
   }
 
-  .copy {
-    font-size: 14px;
-    color: #ccc;
+  .footer-contact a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .footer-contact a:hover {
+    text-decoration: underline;
+    color: #00bcd4;
+  }
+
+  .footer-social {
+    margin: 20px 0;
+  }
+
+  .footer-social a {
+    display: inline-block;
+    margin: 0 8px;
+    font-size: 18px;
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+
+  .footer-social a:hover {
+    color: #00bcd4;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    margin-top: 10px;
+    color: #aaa;
+  }
+
+  @media (max-width: 600px) {
+    .footer-title { font-size: 18px; }
+    .footer-contact { font-size: 13px; }
+    .footer-social a { font-size: 16px; }
   }
 </style>
-
-<footer class="main-footer">
-  <div class="footer-content">
-    <p class="footer-title">منصة الكود سعودي لبيع المنتجات الرقمية</p>
-
-    <ul class="contact-info">
-      <li><i class="fas fa-map-marker-alt"></i> الرياض - المملكة العربية السعودية</li>
-      <li><i class="fas fa-envelope"></i> support@saudicodes.com</li>
-      <li><i class="fas fa-phone"></i> +966-594100055</li>
-      <li><i class="fas fa-globe"></i> www.saudicodes.com</li>
-    </ul>
-
-    <div class="social-icons">
-      <a href="#" class="icon" title="تويتر"><i class="fab fa-twitter"></i></a>
-      <a href="#" class="icon" title="فيسبوك"><i class="fab fa-facebook"></i></a>
-      <a href="#" class="icon" title="إنستغرام"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="icon" title="لينكدإن"><i class="fab fa-linkedin"></i></a>
-    </div>
-
-    <p class="copy">© جميع الحقوق محفوظة 2025</p>
-  </div>
-</footer>
