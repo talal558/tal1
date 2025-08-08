@@ -1,80 +1,76 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>منصة الكود سعودي لبيع المنتجات الرقمية</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>SAUI CODE</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Orbitron Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Cairo', sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-      direction: rtl;
-    }
-
-    header.main-header {
+      min-height: max(884px, 100dvh);
+      background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
       position: relative;
-      height: 300px;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
     }
 
-    .header-video {
+    .digital-grid {
+      background-image:
+        repeating-linear-gradient(transparent 0px, #262b47 2px, transparent 24px),
+        repeating-linear-gradient(90deg, transparent 0px, #262b47 2px, transparent 24px);
+      opacity: 0.24;
       position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(40%);
+      width: 100vw;
+      height: 100vh;
+      top: 0; left: 0; z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes digital-glow {
+      0%, 100% {
+        text-shadow: 0 0 10px #84d8fa, 0 0 20px #84d8fa, 0 0 30px #05d9e8,
+                     0 0 50px #05d9e8, 0 0 70px #05d9e8;
+      }
+      50% {
+        text-shadow: 0 0 20px #fff, 0 0 30px #05d9e8, 0 0 60px #05d9e8;
+      }
+    }
+
+    .animate-digital-glow {
+      animation: digital-glow 2s ease-in-out infinite;
+    }
+
+    .digital-letters {
+      font-family: 'Orbitron', monospace;
+      letter-spacing: 0.15em;
+      position: relative;
       z-index: 1;
     }
 
-    .header-overlay {
+    .pulse {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-      z-index: 2;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      border: 2px solid #05d9e8;
+      opacity: 0.16;
+      animation: pulse 2s infinite linear;
+      z-index: 0;
     }
 
-    .header-content {
-      position: relative;
-      z-index: 3;
-      color: white;
-      padding: 20px;
+    @keyframes pulse {
+      0%   { opacity: 0.2; transform: scale(1) translate(-50%,-50%); }
+      70%  { opacity: 0.07; transform: scale(1.18) translate(-50%,-50%); }
+      100% { opacity: 0; transform: scale(1.32) translate(-50%,-50%); }
     }
 
-    .site-title {
-      font-size: 26px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: bold;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 10px 25px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .main-nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .nav-btn {
+    .footer-button {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -82,115 +78,63 @@
       font-size: 14px;
       font-weight: bold;
       color: white;
-      background-color: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 8px;
       text-decoration: none;
       transition: 0.3s ease;
-      -webkit-backdrop-filter: blur(4px);
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    .nav-btn:hover {
-      background-color: rgba(0,0,0,0.85);
-      color: #00bcd4;
+    .footer-button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #05d9e8;
       transform: scale(1.05);
-    }
-
-    .nav-btn.login    { background-color: #007bff; }
-    .nav-btn.login:hover { background-color: #0056b3; }
-
-    .nav-btn.register { background-color: #28a745; }
-    .nav-btn.register:hover { background-color: #218838; }
-
-    .nav-btn.cart     { background-color: #6f42c1; }
-    .nav-btn.cart:hover { background-color: #4e2a9b; }
-
-    .icon {
-      font-size: 14px;
-    }
-
-    main {
-      padding: 40px;
-    }
-
-    .hero {
-      text-align: center;
-      background: linear-gradient(to left, #3f87a6, #ebf8e1);
-      padding: 50px 20px;
-      border-radius: 16px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      margin-bottom: 40px;
-    }
-
-    .hero h2 {
-      font-size: 30px;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .hero p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: auto;
-      color: #333;
-    }
-
-    .hero a {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 12px 28px;
-      background-color: #007bff;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 18px;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-
-    .hero a:hover {
-      background-color: #0056b3;
-    }
-
-    @media (max-width: 768px) {
-      .site-title { font-size: 20px; padding: 8px 18px; }
-      .nav-btn { font-size: 13px; padding: 6px 14px; }
-      .hero h2 { font-size: 24px; }
-      .hero p { font-size: 16px; }
-      .hero a { font-size: 15px; padding: 10px 20px; }
     }
   </style>
 </head>
-<body>
 
-  <!-- الشريط العلوي -->
-  <header class="main-header">
-    <video autoplay muted loop class="header-video" poster="{% static 'images/header_bg_fallback.jpg' %}">
-      <source src="{% static 'videos/header_bg.mp4' %}" type="video/mp4">
-      متصفحك لا يدعم تشغيل الفيديو.
-    </video>
-    <div class="header-overlay"></div>
-    <div class="header-content">
-      <h1 class="site-title">منصة الكود سعودي لبيع المنتجات الرقمية</h1>
-      <nav class="main-nav">
-        <a href="{% url 'home' %}" class="nav-btn"><i class="fas fa-home icon"></i><span>الرئيسية</span></a>
-        <a href="{% url 'accounts:login' %}" class="nav-btn login"><i class="fas fa-lock icon"></i><span>دخول</span></a>
-        <a href="{% url 'accounts:register' %}" class="nav-btn register"><i class="fas fa-user-plus icon"></i><span>تسجيل</span></a>
-        <a href="{% url 'products:list' %}" class="nav-btn"><i class="fas fa-box-open icon"></i><span>المنتجات</span></a>
-        <a href="{% url 'orders:cart' %}" class="nav-btn cart"><i class="fas fa-shopping-cart icon"></i><span>السلة</span></a>
-      </nav>
+<body class="bg-black flex flex-col justify-between min-h-screen">
+  <div class="digital-grid"></div>
+  <div class="pulse"></div>
+  <div class="pulse" style="animation-delay:0.7s"></div>
+
+  <!-- الشعار -->
+  <div class="text-center relative z-10 mt-20">
+    <h1 class="digital-letters text-6xl md:text-8xl font-bold animate-digital-glow tracking-[.24em]">
+      <span class="text-[#A0C4FF]">SAU</span>
+      <span class="text-[#fff]">i</span>
+      <span class="text-[#05d9e8] border-2 border-[#05d9e8] rounded-md px-2">C</span>
+      <span class="text-[#A0C4FF]">ODE</span>
+    </h1>
+    <div class="mt-6 flex justify-center gap-2 text-sm font-mono text-[#84d8fa]" style="direction:ltr;">
+      <span>00110101</span>
+      <span>منصة الكود سعودي لبيع المنتجات الرقمية</span>
+      <span>11001100</span>
     </div>
-  </header>
+  </div>
 
-  <!-- المحتوى الرئيسي -->
-  <main>
-    <section class="hero">
-      <h2>مرحبًا بك في عالم المنتجات الرقمية</h2>
-      <p>نوفر لك ملفات، دورات، تصاميم، وقوالب رقمية احترافية جاهزة للتحميل الفوري</p>
-      <a href="{% url 'products:list' %}">استعرض المنتجات</a>
-    </section>
-  </main>
+  <!-- الفوتر المعدل -->
+  <footer class="relative z-10 bg-transparent text-white text-center py-10 mt-20">
+    <h2 class="text-xl font-bold text-[#A0C4FF] mb-4">منصة الكود سعودي لبيع المنتجات الرقمية</h2>
+    <div class="flex justify-center flex-wrap gap-4 mb-6">
+      <a href="#" class="footer-button"><i class="fas fa-map-marker-alt"></i> الأحساء</a>
+      <a href="mailto:saudicode586@gmail.com" class="footer-button"><i class="fas fa-envelope"></i> البريد</a>
+      <a href="tel:+966594100055" class="footer-button"><i class="fas fa-phone"></i> 966-594100055+</a>
+      <a href="https://www.saudicodes.com" class="footer-button"><i class="fas fa-globe"></i> الموقع</a>
+    </div>
+    <div class="flex justify-center gap-4 text-xl mb-4">
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-snapchat"></i>
+      <i class="fab fa-telegram"></i>
+      <i class="fab fa-whatsapp"></i>
+    </div>
+    <p class="text-sm text-gray-400">© جميع الحقوق محفوظة 2025</p>
+  </footer>
 
+  <!-- أيقونات FontAwesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

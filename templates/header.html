@@ -7,10 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,41 +32,67 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
     }
 
-    .header-video {
+    .digital-grid {
+      background-image:
+        repeating-linear-gradient(transparent 0px, #262b47 2px, transparent 24px),
+        repeating-linear-gradient(90deg, transparent 0px, #262b47 2px, transparent 24px);
+      opacity: 0.24;
       position: absolute;
-      top: 0; left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      filter: brightness(40%);
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .pulse {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      border: 2px solid #05d9e8;
+      opacity: 0.16;
+      animation: pulse 2s infinite linear;
+      z-index: 0;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.2; transform: scale(1) translate(-50%, -50%); }
+      70% { opacity: 0.07; transform: scale(1.18) translate(-50%, -50%); }
+      100% { opacity: 0; transform: scale(1.32) translate(-50%, -50%); }
+    }
+
+    @keyframes digital-glow {
+      0%, 100% {
+        text-shadow: 0 0 10px #84d8fa, 0 0 20px #84d8fa, 0 0 30px #05d9e8,
+                     0 0 50px #05d9e8, 0 0 70px #05d9e8;
+      }
+      50% {
+        text-shadow: 0 0 20px #fff, 0 0 30px #05d9e8, 0 0 60px #05d9e8;
+      }
+    }
+
+    .digital-letters {
+      font-family: 'Orbitron', monospace;
+      letter-spacing: 0.15em;
+      position: relative;
       z-index: 1;
     }
 
-    .header-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
-      z-index: 2;
-    }
-
-    .header-content {
-      position: relative;
-      z-index: 3;
-      color: white;
-      padding: 20px;
+    .animate-digital-glow {
+      animation: digital-glow 2s ease-in-out infinite;
     }
 
     .site-title {
       font-size: 26px;
       font-family: 'Montserrat', sans-serif;
       font-weight: bold;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 10px 25px;
-      border-radius: 12px;
       margin-bottom: 20px;
     }
 
@@ -82,29 +111,20 @@
       font-size: 14px;
       font-weight: bold;
       color: white;
-      background-color: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 8px;
       text-decoration: none;
       transition: 0.3s ease;
-      -webkit-backdrop-filter: blur(4px);
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .nav-btn:hover {
-      background-color: rgba(0,0,0,0.85);
+      background-color: rgba(0, 0, 0, 0.6);
       color: #00bcd4;
       transform: scale(1.05);
     }
-
-    .nav-btn.login    { background-color: #007bff; }
-    .nav-btn.login:hover { background-color: #0056b3; }
-
-    .nav-btn.register { background-color: #28a745; }
-    .nav-btn.register:hover { background-color: #218838; }
-
-    .nav-btn.cart     { background-color: #6f42c1; }
-    .nav-btn.cart:hover { background-color: #4e2a9b; }
 
     .icon {
       font-size: 14px;
@@ -152,33 +172,33 @@
     .hero a:hover {
       background-color: #0056b3;
     }
-
-    @media (max-width: 768px) {
-      .site-title { font-size: 20px; padding: 8px 18px; }
-      .nav-btn { font-size: 13px; padding: 6px 14px; }
-      .hero h2 { font-size: 24px; }
-      .hero p { font-size: 16px; }
-      .hero a { font-size: 15px; padding: 10px 20px; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- الشريط العلوي -->
+  <!-- الشريط العلوي المعدل بدون فيديو -->
   <header class="main-header">
-    <video autoplay muted loop class="header-video" poster="{% static 'images/header_bg_fallback.jpg' %}">
-      <source src="{% static 'videos/header_bg.mp4' %}" type="video/mp4">
-      متصفحك لا يدعم تشغيل الفيديو.
-    </video>
-    <div class="header-overlay"></div>
-    <div class="header-content">
-      <h1 class="site-title">منصة الكود سعودي لبيع المنتجات الرقمية</h1>
-      <nav class="main-nav">
+    <div class="digital-grid"></div>
+    <div class="pulse"></div>
+    <div class="pulse" style="animation-delay:0.7s"></div>
+    <div class="header-content z-10 relative">
+      <h1 class="digital-letters text-4xl md:text-6xl font-bold animate-digital-glow tracking-[.24em]">
+        <span class="text-[#A0C4FF]">SAU</span>
+        <span class="text-white">i</span>
+        <span class="text-[#05d9e8] border-2 border-[#05d9e8] rounded-md px-2">C</span>
+        <span class="text-[#A0C4FF]">ODE</span>
+      </h1>
+      <div class="mt-4 flex justify-center gap-2 text-sm font-mono text-[#84d8fa]" style="direction:ltr;">
+        <span>00110101</span>
+        <span>منصة الكود سعودي لبيع المنتجات الرقمية</span>
+        <span>01011010</span>
+      </div>
+      <nav class="main-nav mt-6">
         <a href="{% url 'home' %}" class="nav-btn"><i class="fas fa-home icon"></i><span>الرئيسية</span></a>
-        <a href="{% url 'accounts:login' %}" class="nav-btn login"><i class="fas fa-lock icon"></i><span>دخول</span></a>
-        <a href="{% url 'accounts:register' %}" class="nav-btn register"><i class="fas fa-user-plus icon"></i><span>تسجيل</span></a>
+        <a href="{% url 'accounts:login' %}" class="nav-btn"><i class="fas fa-lock icon"></i><span>دخول</span></a>
+        <a href="{% url 'accounts:register' %}" class="nav-btn"><i class="fas fa-user-plus icon"></i><span>تسجيل</span></a>
         <a href="{% url 'products:list' %}" class="nav-btn"><i class="fas fa-box-open icon"></i><span>المنتجات</span></a>
-        <a href="{% url 'orders:cart' %}" class="nav-btn cart"><i class="fas fa-shopping-cart icon"></i><span>السلة</span></a>
+        <a href="{% url 'orders:cart' %}" class="nav-btn"><i class="fas fa-shopping-cart icon"></i><span>السلة</span></a>
       </nav>
     </div>
   </header>
@@ -191,6 +211,5 @@
       <a href="{% url 'products:list' %}">استعرض المنتجات</a>
     </section>
   </main>
-
 </body>
 </html>
