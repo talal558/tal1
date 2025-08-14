@@ -1,0 +1,20 @@
+# بيئة التطوير
+venv/
+.env
+
+# قاعدة بيانات SQLite (للتطوير فقط)
+db.sqlite3
+
+# ملفات static التي يتم تجميعها
+/staticfiles/
+/media/
+
+# ملفات Python المؤقتة
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ملفات أنظمة التشغيل
+.DS_Store
+Thumbs.db
