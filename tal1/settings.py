@@ -5,13 +5,13 @@ import os
 # المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# مفتاح التشفير السري
+# مفتاح التشفير السري (من ملف .env)
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dummy-key')
 
-# وضع التصحيح (True للتطوير / False للإنتاج)
+# وضع التطوير / الإنتاج
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-# المضيفون المسموح بهم
+# المضيفون المسموح لهم
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
 
 # التطبيقات المثبتة
@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'products',
     'orders',
 
-    # تخزين سحابي عبر Cloudinary
+    # مكتبة رفع الملفات عبر Cloudinary
     'cloudinary',
     'cloudinary_storage',
 ]
@@ -47,7 +47,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tal1.urls'
 
-# القوالب
+# إعدادات القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -66,8 +66,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tal1.wsgi.application'
 
-# قاعدة البيانات (SQLite في التطوير - PostgreSQL في الإنتاج)
+# قاعدة البيانات
 if DEBUG:
+    # SQLite في التطوير
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -75,6 +76,7 @@ if DEBUG:
         }
     }
 else:
+    # PostgreSQL في الإنتاج
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -82,11 +84,11 @@ else:
             'USER': config('DB_USER'),
             'PASSWORD': config('DB_PASSWORD'),
             'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT'),
+            'PORT': config('DB_PORT', default='5432'),
         }
     }
 
-# تحقق من كلمات المرور
+# التحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -98,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 # إعدادات الملفات الثابتة
@@ -118,5 +119,5 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# الحقول التلقائية
+# نوع الحقول التلقائية
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

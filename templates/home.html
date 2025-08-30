@@ -1,140 +1,155 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>SAUI CODE</title>
+  <!-- 1. الترميز أول شيء -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a1c26" />
+  <title>SAUI CODE - منصة الكود سعودي</title>
 
-  <!-- Tailwind CSS -->
+  <!-- 2. خط Orbitron للشعار الرقمي -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+
+  <!-- 3. Font Awesome (مصدر موثوق بدون مسافات زائدة) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- 4. Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Orbitron Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <!-- 5. تخصيص Tailwind (اختياري) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            orbitron: ['Orbitron', 'monospace'],
+          },
+          colors: {
+            'neon-blue': '#05d9e8',
+            'sky-light': '#A0C4FF',
+            'dark-bg': '#0f2027',
+            'grid-line': '#262b47',
+          },
+          keyframes: {
+            'digital-glow': {
+              '0%, 100%': { textShadow: '0 0 10px #84d8fa, 0 0 20px #84d8fa, 0 0 30px #05d9e8, 0 0 50px #05d9e8' },
+              '50%': { textShadow: '0 0 20px white, 0 0 40px #05d9e8, 0 0 60px #05d9e8' }
+            },
+            pulse: {
+              '0%': { opacity: 0.2, transform: 'scale(1)' },
+              '70%': { opacity: 0.07, transform: 'scale(1.18)' },
+              '100%': { opacity: 0, transform: 'scale(1.32)' }
+            }
+          },
+          animation: {
+            'digital-glow': 'digital-glow 2s ease-in-out infinite',
+            'pulse': 'pulse 2s infinite linear',
+          }
+        }
+      }
+    }
+  </script>
 
   <style>
     body {
-      min-height: max(884px, 100dvh);
-      background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+      min-height: 100vh;
+      background: linear-gradient(135deg, theme('colors.dark-bg') 0%, #2c5364 100%);
       position: relative;
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
 
     .digital-grid {
       background-image:
-        repeating-linear-gradient(transparent 0px, #262b47 2px, transparent 24px),
-        repeating-linear-gradient(90deg, transparent 0px, #262b47 2px, transparent 24px);
+        repeating-linear-gradient(transparent 0px, theme('colors.grid-line') 2px, transparent 24px),
+        repeating-linear-gradient(90deg, transparent 0px, theme('colors.grid-line') 2px, transparent 24px);
       opacity: 0.24;
       position: absolute;
-      width: 100vw;
-      height: 100vh;
-      top: 0; left: 0; z-index: 0;
+      inset: 0;
       pointer-events: none;
-    }
-
-    @keyframes digital-glow {
-      0%, 100% {
-        text-shadow: 0 0 10px #84d8fa, 0 0 20px #84d8fa, 0 0 30px #05d9e8,
-                     0 0 50px #05d9e8, 0 0 70px #05d9e8;
-      }
-      50% {
-        text-shadow: 0 0 20px #fff, 0 0 30px #05d9e8, 0 0 60px #05d9e8;
-      }
-    }
-
-    .animate-digital-glow {
-      animation: digital-glow 2s ease-in-out infinite;
-    }
-
-    .digital-letters {
-      font-family: 'Orbitron', monospace;
-      letter-spacing: 0.15em;
-      position: relative;
-      z-index: 1;
-    }
-
-    .pulse {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%,-50%);
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      border: 2px solid #05d9e8;
-      opacity: 0.16;
-      animation: pulse 2s infinite linear;
       z-index: 0;
     }
 
-    @keyframes pulse {
-      0%   { opacity: 0.2; transform: scale(1) translate(-50%,-50%); }
-      70%  { opacity: 0.07; transform: scale(1.18) translate(-50%,-50%); }
-      100% { opacity: 0; transform: scale(1.32) translate(-50%,-50%); }
+    .pulse {
+      @apply absolute w-96 h-96 border-2 border-neon-blue rounded-full opacity-20 animate-pulse;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    .pulse-delay-07 {
+      animation-delay: 0.7s;
     }
 
     .footer-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: bold;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      text-decoration: none;
-      transition: 0.3s ease;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .footer-button:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-      color: #05d9e8;
-      transform: scale(1.05);
+      @apply inline-flex items-center gap-2 px-4 py-2 bg-black/40 text-white rounded-lg border border-white/20 backdrop-blur-sm transition-all duration-300 hover:bg-black/60 hover:text-neon-blue hover:scale-105;
     }
   </style>
 </head>
+<body class="text-gray-100 flex flex-col min-h-screen">
 
-<body class="bg-black flex flex-col justify-between min-h-screen">
+  <!-- الخلفية الرقمية -->
   <div class="digital-grid"></div>
   <div class="pulse"></div>
-  <div class="pulse" style="animation-delay:0.7s"></div>
+  <div class="pulse pulse-delay-07"></div>
 
-  <!-- الشعار -->
-  <div class="text-center relative z-10 mt-20">
-    <h1 class="digital-letters text-6xl md:text-8xl font-bold animate-digital-glow tracking-[.24em]">
-      <span class="text-[#A0C4FF]">SAU</span>
-      <span class="text-[#fff]">i</span>
-      <span class="text-[#05d9e8] border-2 border-[#05d9e8] rounded-md px-2">C</span>
-      <span class="text-[#A0C4FF]">ODE</span>
+  <!-- الشعار الرئيسي -->
+  <header class="text-center relative z-10 mt-24">
+    <h1 class="digital-letters text-5xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-light via-white to-neon-blue animate-digital-glow font-orbitron tracking-wider">
+      SAU<span class="text-white">i</span><span class="border-2 border-neon-blue text-neon-blue px-2 rounded-md">C</span>ODE
     </h1>
-    <div class="mt-6 flex justify-center gap-2 text-sm font-mono text-[#84d8fa]" style="direction:ltr;">
+    <div class="mt-6 flex justify-center gap-4 text-sm font-mono text-[#84d8fa] ltr opacity-90">
       <span>00110101</span>
-      <span>منصة الكود سعودي لبيع المنتجات الرقمية</span>
+      <span>منصة سعودي لبيع المنتجات الرقمية</span>
       <span>11001100</span>
     </div>
-  </div>
+  </header>
 
-  <!-- الفوتر المعدل -->
-  <footer class="relative z-10 bg-transparent text-white text-center py-10 mt-20">
-    <h2 class="text-xl font-bold text-[#A0C4FF] mb-4">منصة الكود سعودي لبيع المنتجات الرقمية</h2>
-    <div class="flex justify-center flex-wrap gap-4 mb-6">
-      <a href="#" class="footer-button"><i class="fas fa-map-marker-alt"></i> الأحساء</a>
-      <a href="mailto:saudicode586@gmail.com" class="footer-button"><i class="fas fa-envelope"></i> البريد</a>
-      <a href="tel:+966594100055" class="footer-button"><i class="fas fa-phone"></i> 966-594100055+</a>
-      <a href="https://www.saudicodes.com" class="footer-button"><i class="fas fa-globe"></i> الموقع</a>
+  <!-- التذييل (Footer) -->
+  <footer class="relative z-10 mt-auto py-12 bg-transparent text-center">
+    <h2 class="text-2xl font-bold text-sky-light mb-5">منصة الكود سعودي</h2>
+
+    <!-- معلومات الاتصال -->
+    <div class="flex flex-wrap justify-center gap-3 mb-6">
+      <a href="#" class="footer-button">
+        <i class="fas fa-map-marker-alt"></i> الأحساء
+      </a>
+      <a href="mailto:saudicode586@gmail.com" class="footer-button">
+        <i class="fas fa-envelope"></i> البريد
+      </a>
+      <a href="tel:+966594100055" class="footer-button">
+        <i class="fas fa-phone"></i> +966 59 410 0055
+      </a>
+      <a href="https://www.saudicodes.com" target="_blank" rel="noopener noreferrer" class="footer-button">
+        <i class="fas fa-globe"></i> الموقع
+      </a>
     </div>
-    <div class="flex justify-center gap-4 text-xl mb-4">
-      <i class="fab fa-twitter"></i>
-      <i class="fab fa-instagram"></i>
-      <i class="fab fa-snapchat"></i>
-      <i class="fab fa-telegram"></i>
-      <i class="fab fa-whatsapp"></i>
+
+    <!-- وسائل التواصل الاجتماعي -->
+    <div class="flex justify-center gap-6 text-xl mb-4">
+      <a href="https://twitter.com/saudicode58" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:scale-110 transition-transform">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://instagram.com/saudicode586" target="_blank" rel="noopener noreferrer" class="text-pink-500 hover:scale-110 transition-transform">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.snapchat.com/add/saudicode586" target="_blank" rel="noopener noreferrer" class="text-yellow-400 hover:scale-110 transition-transform">
+        <i class="fab fa-snapchat-ghost"></i>
+      </a>
+      <a href="https://t.me/saudicode586" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:scale-110 transition-transform">
+        <i class="fab fa-telegram"></i>
+      </a>
+      <a href="https://wa.me/966594100055" target="_blank" rel="noopener noreferrer" class="text-green-500 hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp"></i>
+      </a>
     </div>
-    <p class="text-sm text-gray-400">© جميع الحقوق محفوظة 2025</p>
+
+    <!-- حقوق النشر -->
+    <p class="text-sm text-gray-400">© جميع الحقوق محفوظة 2025 | SAUiCODE</p>
   </footer>
 
-  <!-- أيقونات FontAwesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

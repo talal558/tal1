@@ -29,6 +29,11 @@
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
   }
 
   .product-card img {
@@ -40,21 +45,24 @@
 
   .product-card h3 {
     margin-top: 15px;
+    color: #333;
   }
 
   .product-card p.description {
     color: #666;
     font-size: 15px;
+    margin: 10px 0;
   }
 
   .product-card p.price {
     font-weight: bold;
     color: #007bff;
+    margin-bottom: 12px;
   }
 
   .product-card a {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 8px 16px;
     background-color: #007bff;
     color: white;
@@ -70,6 +78,7 @@
   .no-products {
     text-align: center;
     font-size: 18px;
+    margin-top: 40px;
   }
 </style>
 
@@ -80,7 +89,12 @@
     <section class="products-grid">
       {% for product in products %}
         <div class="product-card">
-          <img src="{{ product.image.url }}" alt="{{ product.title }}">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.title }}">
+          {% else %}
+            <img src="{% static 'images/no-image.png' %}" alt="لا توجد صورة">
+          {% endif %}
+
           <h3>{{ product.title }}</h3>
           <p class="description">{{ product.description|truncatewords:20 }}</p>
           <p class="price">{{ product.price }} ريال</p>

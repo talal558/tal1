@@ -14,53 +14,83 @@
     background: white;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+    text-align: center;
   }
 
   .product-box img {
     width: 100%;
+    max-height: 350px;
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 20px;
   }
 
   .product-box h2 {
     color: #007bff;
+    font-size: 28px;
+    margin-bottom: 15px;
   }
 
   .product-box p.description {
     font-size: 17px;
     color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
   }
 
   .product-box p.price {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
+    color: #007bff;
     margin-top: 20px;
   }
 
   .product-box a.buy-btn {
     display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
+    margin-top: 18px;
+    padding: 12px 24px;
     background-color: #007bff;
     color: white;
     border-radius: 8px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
 
   .product-box a.buy-btn:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 15px;
+    color: #555;
+    text-decoration: none;
+  }
+  .back-link:hover {
+    text-decoration: underline;
+    color: #007bff;
   }
 </style>
 
 <main>
   <div class="product-box">
-    <img src="{{ product.image.url }}" alt="{{ product.title }}">
+    {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.title }}">
+    {% else %}
+      <img src="{% static 'images/no-image.png' %}" alt="لا توجد صورة">
+    {% endif %}
+
     <h2>{{ product.title }}</h2>
     <p class="description">{{ product.description }}</p>
     <p class="price">💰 {{ product.price }} ريال</p>
+
     <a href="#" class="buy-btn">شراء الآن</a>
+    <br>
+    <a href="{% url 'products:list' %}" class="back-link">⬅ العودة إلى قائمة المنتجات</a>
   </div>
 </main>
 
