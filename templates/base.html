@@ -2,36 +2,66 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <!-- meta يجب أن يبدأ بـ charset ثم viewport -->
+  <!-- 1. الترميز أول شيء -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a1c26" />
 
   <title>{% block title %}منصة الكود سعودي لبيع المنتجات الرقمية{% endblock %}</title>
 
-  <!-- تحسين تحميل الخطوط -->
+  <!-- 2. تحسين تحميل الخطوط -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <!-- 3. خطوط Google (Cairo + Orbitron) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- 4. Font Awesome (محدث وبدون مسافات زائدة) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- ملف التنسيقات الرئيسي -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- 5. Tailwind CSS (CDN) - حذف style.css إذا كنت تعتمد عليه فقط -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- 6. تخصيص Tailwind (اختياري) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'cairo': ['Cairo', 'sans-serif'],
+            'orbitron': ['Orbitron', 'monospace'],
+          },
+          colors: {
+            'neon-blue': '#05d9e8',
+            'dark-bg': '#0f172a',
+            'card-bg': '#1e293b',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- 7. ملف التنسيقات المخصص فقط إذا كنت تستخدم أكوادًا مخصصة (مثل أنماط رقمية) -->
+  {% if use_custom_css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% endif %}
+
+  <!-- 8. كتلة إضافية للعناصر في الـ head (مثل meta ديناميكية، أو CSS خاص بصفحة) -->
   {% block extra_head %}{% endblock %}
 </head>
-<body>
+<body class="font-cairo bg-dark-bg text-gray-200 min-h-screen antialiased">
+  <!-- تضمين الهيدر -->
   {% include 'header.html' %}
 
-  <main role="main">
+  <!-- المحتوى الرئيسي -->
+  <main role="main" class="container mx-auto px-6 py-10">
     {% block content %}{% endblock %}
   </main>
 
+  <!-- تضمين التذييل -->
   {% include 'footer.html' %}
 
+  <!-- كتلة للسكريبتات الإضافية (مثل JavaScript للصفحة) -->
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}المنتجات | منصة الكود سعودي{% endblock %}
+
+{% block content %}
+<main class="container mx-auto px-4 py-10">
+  <h2 class="text-3xl font-bold text-center mb-10 text-cyan-400 tracking-wide">
+    منتجاتنا الرقمية
+  </h2>
+
+  <!-- شبكة البطاقات -->
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    
+    <!-- بطاقة: قوالب -->
+    <div class="bg-gray-900 rounded-xl shadow-lg p-6 hover:scale-105 transition">
+      <div class="text-center">
+        <i class="fas fa-file-code text-5xl text-cyan-400 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">قوالب جاهزة</h3>
+        <p class="text-gray-300 text-sm">
+          قوالب مواقع، سير ذاتية، عروض تقديمية جاهزة للتعديل.
+        </p>
+      </div>
+    </div>
+
+    <!-- بطاقة: تعليم -->
+    <div class="bg-gray-900 rounded-xl shadow-lg p-6 hover:scale-105 transition">
+      <div class="text-center">
+        <i class="fas fa-chalkboard-teacher text-5xl text-green-400 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">منتجات تعليمية</h3>
+        <p class="text-gray-300 text-sm">
+          دروس فيديو، كورسات قصيرة، وكتب PDF تعليمية حديثة.
+        </p>
+      </div>
+    </div>
+
+    <!-- بطاقة: موارد إبداعية -->
+    <div class="bg-gray-900 rounded-xl shadow-lg p-6 hover:scale-105 transition">
+      <div class="text-center">
+        <i class="fas fa-paint-brush text-5xl text-pink-400 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">الموارد الإبداعية</h3>
+        <p class="text-gray-300 text-sm">
+          تصميمات، أيقونات، صور، ومؤثرات صوتية عالية الجودة.
+        </p>
+      </div>
+    </div>
+
+    <!-- بطاقة: برمجيات -->
+    <div class="bg-gray-900 rounded-xl shadow-lg p-6 hover:scale-105 transition">
+      <div class="text-center">
+        <i class="fas fa-code text-5xl text-yellow-400 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">برمجيات وأدوات</h3>
+        <p class="text-gray-300 text-sm">
+          سكربتات Python، إضافات ووردبريس، وأدوات تحليل بيانات.
+        </p>
+      </div>
+    </div>
+
+    <!-- بطاقة: مستندات -->
+    <div class="bg-gray-900 rounded-xl shadow-lg p-6 hover:scale-105 transition">
+      <div class="text-center">
+        <i class="fas fa-file-alt text-5xl text-blue-400 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">مستندات رقمية</h3>
+        <p class="text-gray-300 text-sm">
+          عقود قانونية، ملفات عمل، وخطوط عربية وإنجليزية حصرية.
+        </p>
+      </div>
+    </div>
+
+    <!-- بطاقة: خدمات -->
+    <div class="bg-gray-900 rounded-xl shadow-lg p-6 hover:scale-105 transition">
+      <div class="text-center">
+        <i class="fas fa-rocket text-5xl text-red-400 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">خدمات رقمية</h3>
+        <p class="text-gray-300 text-sm">
+          تصميم شعار سريع، توليد محتوى بالذكاء الاصطناعي، وترجمة فورية.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}
