@@ -2,66 +2,164 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <!-- 1. الترميز أول شيء -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a1c26" />
+  <title>{% block title %}منصة سعودي كود المنتجات الرقمية{% endblock %}</title>
 
-  <title>{% block title %}منصة الكود سعودي لبيع المنتجات الرقمية{% endblock %}</title>
+  <!-- خطوط وأيقونات -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
 
-  <!-- 2. تحسين تحميل الخطوط -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- 3. خطوط Google (Cairo + Orbitron) -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-
-  <!-- 4. Font Awesome (محدث وبدون مسافات زائدة) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- 5. Tailwind CSS (CDN) - حذف style.css إذا كنت تعتمد عليه فقط -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- 6. تخصيص Tailwind (اختياري) -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            'cairo': ['Cairo', 'sans-serif'],
-            'orbitron': ['Orbitron', 'monospace'],
+            cairo: ['Cairo', 'sans-serif'],
+            orbitron: ['Orbitron', 'monospace'],
           },
           colors: {
             'neon-blue': '#05d9e8',
             'dark-bg': '#0f172a',
             'card-bg': '#1e293b',
+          },
+          keyframes: {
+            'digital-glow': {
+              '0%, 100%': { textShadow: '0 0 10px #84d8fa, 0 0 20px #84d8fa, 0 0 30px #05d9e8' },
+              '50%': { textShadow: '0 0 20px white, 0 0 40px #05d9e8, 0 0 60px #05d9e8' }
+            },
+            pulse: {
+              '0%': { opacity: 0.3, transform: 'scale(1)' },
+              '70%': { opacity: 0.1, transform: 'scale(1.18)' },
+              '100%': { opacity: 0, transform: 'scale(1.32)' }
+            }
+          },
+          animation: {
+            'digital-glow': 'digital-glow 2s ease-in-out infinite',
+            'pulse': 'pulse 2s infinite linear',
           }
         }
       }
     }
   </script>
-
-  <!-- 7. ملف التنسيقات المخصص فقط إذا كنت تستخدم أكوادًا مخصصة (مثل أنماط رقمية) -->
-  {% if use_custom_css %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  {% endif %}
-
-  <!-- 8. كتلة إضافية للعناصر في الـ head (مثل meta ديناميكية، أو CSS خاص بصفحة) -->
-  {% block extra_head %}{% endblock %}
 </head>
-<body class="font-cairo bg-dark-bg text-gray-200 min-h-screen antialiased">
-  <!-- تضمين الهيدر -->
-  {% include 'header.html' %}
+<body class="font-cairo bg-dark-bg text-gray-200 min-h-screen flex flex-col">
 
-  <!-- المحتوى الرئيسي -->
-  <main role="main" class="container mx-auto px-6 py-10">
+  <!-- ✅ الهيدر -->
+  <header class="relative h-96 overflow-hidden flex items-center justify-center text-center bg-gradient-to-br from-[#0f2027] to-[#1a3a4f]">
+    <!-- شبكة رقمية -->
+    <div class="absolute inset-0 opacity-20"
+         style="background-image:
+           repeating-linear-gradient(transparent 0px, #262b47 2px, transparent 24px),
+           repeating-linear-gradient(90deg, transparent 0px, #262b47 2px, transparent 24px);"></div>
+
+    <!-- دوائر النبض -->
+    <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse"></div>
+    <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse" style="animation-delay:.7s;"></div>
+
+    <!-- المحتوى -->
+    <div class="relative z-10 px-6">
+      <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue animate-digital-glow font-orbitron">
+        SAU<span class="text-white">i</span><span class="border-2 border-neon-blue text-neon-blue px-2 rounded-md">C</span>ODE
+      </h1>
+      <div class="mt-4 flex justify-center gap-4 text-xs md:text-sm font-mono text-neon-blue">
+        <span class="opacity-80">00110101</span>
+        <span class="tracking-wider">منصة سعودي كود المنتجات الرقمية</span>
+        <span class="opacity-80">01011010</span>
+      </div>
+
+      <!-- القائمة -->
+      <nav class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="{% url 'home' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+          <i class="fas fa-home"></i> الرئيسية
+        </a>
+        <a href="{% url 'accounts:login' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+          <i class="fas fa-lock"></i> دخول
+        </a>
+        <a href="{% url 'accounts:register' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+          <i class="fas fa-user-plus"></i> تسجيل
+        </a>
+        <a href="{% url 'products:list' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+          <i class="fas fa-box-open"></i> المنتجات
+        </a>
+        <a href="{% url 'orders:cart' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+          <i class="fas fa-shopping-cart"></i> السلة
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ✅ المحتوى -->
+  <main class="flex-1">
     {% block content %}{% endblock %}
   </main>
 
-  <!-- تضمين التذييل -->
-  {% include 'footer.html' %}
+  <!-- ✅ الفوتر -->
+  <footer class="bg-[#0b1525] text-gray-300 py-10 mt-12 border-t border-gray-700">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6">
 
-  <!-- كتلة للسكريبتات الإضافية (مثل JavaScript للصفحة) -->
-  {% block extra_scripts %}{% endblock %}
+      <!-- معلومات الاتصال -->
+      <div class="space-y-3 text-center">
+        <h3 class="text-lg font-semibold text-white">اتصل بنا</h3>
+        <ul class="space-y-2 text-sm">
+          <li class="flex items-center justify-center gap-2">
+            <i class="fas fa-map-marker-alt text-cyan-400"></i>
+            الأحساء - المملكة العربية السعودية
+          </li>
+          <li class="flex items-center justify-center gap-2">
+            <i class="fas fa-envelope text-cyan-400"></i>
+            <a href="mailto:saudicode586@gmail.com" class="hover:text-cyan-300 transition">saudicode586@gmail.com</a>
+          </li>
+          <li class="flex items-center justify-center gap-2">
+            <i class="fas fa-phone text-cyan-400"></i>
+            <a href="tel:+966594100055" class="hover:text-cyan-300 transition">+966-594100055</a>
+          </li>
+          <li class="flex items-center justify-center gap-2">
+            <i class="fas fa-globe text-cyan-400"></i>
+            <a href="https://www.saudicodes.com" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 transition">www.saudicodes.com</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- وسائل التواصل الاجتماعي -->
+      <div class="space-y-4 text-center">
+        <h3 class="text-lg font-semibold text-white">تابعنا</h3>
+        <div class="flex justify-center space-x-4 space-x-reverse">
+          <a href="https://wa.me/966594100055" target="_blank" rel="noopener noreferrer" title="واتساب" class="text-2xl text-green-500 hover:scale-110 transition-transform duration-300">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="https://t.me/saudicode586" target="_blank" rel="noopener noreferrer" title="تيليجرام" class="text-2xl text-blue-400 hover:scale-110 transition-transform duration-300">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://www.snapchat.com/add/saudicode586" target="_blank" rel="noopener noreferrer" title="سناب شات" class="text-2xl text-yellow-400 hover:scale-110 transition-transform duration-300">
+            <i class="fab fa-snapchat-ghost"></i>
+          </a>
+          <a href="https://www.tiktok.com/@saudicode586" target="_blank" rel="noopener noreferrer" title="تيك توك" class="text-2xl text-black hover:scale-110 transition-transform duration-300">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="https://www.instagram.com/saudicode586" target="_blank" rel="noopener noreferrer" title="انستقرام" class="text-2xl text-pink-500 hover:scale-110 transition-transform duration-300">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/saudicode586" target="_blank" rel="noopener noreferrer" title="لينكدإن" class="text-2xl text-blue-600 hover:scale-110 transition-transform duration-300">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/saudicode58" target="_blank" rel="noopener noreferrer" title="تويتر" class="text-2xl text-blue-400 hover:scale-110 transition-transform duration-300">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- خط سفلي -->
+    <div class="text-center text-gray-500 text-sm mt-8 border-t border-gray-700 pt-4">
+      © 2025 منصة سعودي كود المنتجات الرقمية - جميع الحقوق محفوظة
+    </div>
+  </footer>
+
 </body>
 </html>
