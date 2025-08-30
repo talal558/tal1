@@ -1,15 +1,54 @@
-{% load static %}
-{% include 'header.html' %}
+{% extends "base.html" %}
+{% block title %}تسجيل الدخول{% endblock %}
+{% block content %}
 
-<!-- ربط ملف التنسيق -->
-<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+<section class="max-w-lg mx-auto mt-12 bg-card-bg/80 p-10 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/10">
+  <h2 class="text-2xl font-bold text-white text-center mb-6">
+    🔒 تسجيل الدخول
+  </h2>
 
-<h2 class="page-title">🔐 تسجيل الدخول</h2>
+  <form method="post" class="space-y-5">
+    {% csrf_token %}
 
-<form method="post" class="register-form">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">دخول</button>
-</form>
+    <!-- رسائل الأخطاء العامة -->
+    {% if form.non_field_errors %}
+      <div class="bg-red-600/80 text-white p-3 rounded-lg text-sm mb-4">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
 
-{% include 'footer.html' %}
+    <!-- اسم المستخدم -->
+    <div>
+      <label for="username" class="block mb-2 font-semibold text-gray-200">اسم المستخدم</label>
+      {{ form.username }}
+      {% if form.username.errors %}
+        <p class="text-red-400 text-sm mt-1">{{ form.username.errors|striptags }}</p>
+      {% endif %}
+    </div>
+
+    <!-- كلمة المرور -->
+    <div>
+      <label for="password" class="block mb-2 font-semibold text-gray-200">كلمة المرور</label>
+      {{ form.password }}
+      {% if form.password.errors %}
+        <p class="text-red-400 text-sm mt-1">{{ form.password.errors|striptags }}</p>
+      {% endif %}
+    </div>
+
+    <!-- زر الدخول -->
+    <button type="submit"
+            class="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 shadow-md hover:shadow-cyan-500/30">
+      دخول
+    </button>
+  </form>
+
+  <!-- روابط إضافية -->
+  <div class="text-center text-sm text-gray-400 mt-6 space-y-2">
+    <p>
+      ليس لديك حساب؟
+      <a href="{% url 'accounts:register' %}" class="text-neon-blue hover:underline">سجّل الآن</a>
+    </p>
+  </div>
+</section>
+
+{% endblock %}
