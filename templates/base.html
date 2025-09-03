@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <!-- ترميز وعرض -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a1c26" />
@@ -47,25 +48,35 @@
       }
     }
   </script>
+
+  <!-- ✅ أنماط إضافية بديلة عن inline styles -->
+  <style>
+    .digital-grid {
+      background-image:
+        repeating-linear-gradient(transparent 0px, #262b47 2px, transparent 24px),
+        repeating-linear-gradient(90deg, transparent 0px, #262b47 2px, transparent 24px);
+    }
+    .pulse-delay-07 {
+      animation-delay: .7s;
+    }
+  </style>
 </head>
 <body class="font-cairo bg-dark-bg text-gray-200 min-h-screen flex flex-col">
 
   <!-- ✅ الهيدر -->
   <header class="relative h-96 overflow-hidden flex items-center justify-center text-center bg-gradient-to-br from-[#0f2027] to-[#1a3a4f]">
     <!-- شبكة رقمية -->
-    <div class="absolute inset-0 opacity-20"
-         style="background-image:
-           repeating-linear-gradient(transparent 0px, #262b47 2px, transparent 24px),
-           repeating-linear-gradient(90deg, transparent 0px, #262b47 2px, transparent 24px);"></div>
+    <div class="absolute inset-0 opacity-20 digital-grid"></div>
 
     <!-- دوائر النبض -->
     <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse"></div>
-    <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse" style="animation-delay:.7s;"></div>
+    <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse pulse-delay-07"></div>
 
     <!-- المحتوى -->
     <div class="relative z-10 px-6">
       <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue animate-digital-glow font-orbitron">
-        SAU<span class="text-white">i</span><span class="border-2 border-neon-blue text-neon-blue px-2 rounded-md">C</span>ODE
+        SAU<span class="text-white">i</span>
+        <span class="border-2 border-neon-blue text-neon-blue px-2 rounded-md">C</span>ODE
       </h1>
       <div class="mt-4 flex justify-center gap-4 text-xs md:text-sm font-mono text-neon-blue">
         <span class="opacity-80">00110101</span>
@@ -126,29 +137,29 @@
         </ul>
       </div>
 
-      <!-- وسائل التواصل الاجتماعي -->
+      <!-- وسائل التواصل -->
       <div class="space-y-4 text-center">
         <h3 class="text-lg font-semibold text-white">تابعنا</h3>
-        <div class="flex justify-center space-x-4 space-x-reverse">
-          <a href="https://wa.me/966594100055" target="_blank" rel="noopener noreferrer" title="واتساب" class="text-2xl text-green-500 hover:scale-110 transition-transform duration-300">
+        <div class="flex justify-center gap-4">
+          <a href="https://wa.me/966594100055" target="_blank" rel="noopener noreferrer" aria-label="واتساب" title="واتساب" class="text-2xl text-green-500 hover:scale-110 transition-transform duration-300">
             <i class="fab fa-whatsapp"></i>
           </a>
-          <a href="https://t.me/saudicode586" target="_blank" rel="noopener noreferrer" title="تيليجرام" class="text-2xl text-blue-400 hover:scale-110 transition-transform duration-300">
+          <a href="https://t.me/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="تيليجرام" title="تيليجرام" class="text-2xl text-blue-400 hover:scale-110 transition-transform duration-300">
             <i class="fab fa-telegram"></i>
           </a>
-          <a href="https://www.snapchat.com/add/saudicode586" target="_blank" rel="noopener noreferrer" title="سناب شات" class="text-2xl text-yellow-400 hover:scale-110 transition-transform duration-300">
+          <a href="https://www.snapchat.com/add/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="سناب شات" title="سناب شات" class="text-2xl text-yellow-400 hover:scale-110 transition-transform duration-300">
             <i class="fab fa-snapchat-ghost"></i>
           </a>
-          <a href="https://www.tiktok.com/@saudicode586" target="_blank" rel="noopener noreferrer" title="تيك توك" class="text-2xl text-black hover:scale-110 transition-transform duration-300">
+          <a href="https://www.tiktok.com/@saudicode586" target="_blank" rel="noopener noreferrer" aria-label="تيك توك" title="تيك توك" class="text-2xl text-black hover:scale-110 transition-transform duration-300">
             <i class="fab fa-tiktok"></i>
           </a>
-          <a href="https://www.instagram.com/saudicode586" target="_blank" rel="noopener noreferrer" title="انستقرام" class="text-2xl text-pink-500 hover:scale-110 transition-transform duration-300">
+          <a href="https://www.instagram.com/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام" title="إنستغرام" class="text-2xl text-pink-500 hover:scale-110 transition-transform duration-300">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="https://www.linkedin.com/in/saudicode586" target="_blank" rel="noopener noreferrer" title="لينكدإن" class="text-2xl text-blue-600 hover:scale-110 transition-transform duration-300">
+          <a href="https://www.linkedin.com/in/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="لينكدإن" title="لينكدإن" class="text-2xl text-blue-600 hover:scale-110 transition-transform duration-300">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://twitter.com/saudicode58" target="_blank" rel="noopener noreferrer" title="تويتر" class="text-2xl text-blue-400 hover:scale-110 transition-transform duration-300">
+          <a href="https://twitter.com/saudicode58" target="_blank" rel="noopener noreferrer" aria-label="تويتر" title="تويتر" class="text-2xl text-blue-400 hover:scale-110 transition-transform duration-300">
             <i class="fab fa-twitter"></i>
           </a>
         </div>
