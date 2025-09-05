@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a1c26" />
-  <title>{% block title %}منصة سعودي كود المنتجات الرقمية{% endblock %}</title>
+  <title>منصة سعودي كود المنتجات الرقمية</title>
 
   <!-- خطوط وأيقونات -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,8 +35,8 @@
               '50%': { textShadow: '0 0 20px white, 0 0 40px #05d9e8, 0 0 60px #05d9e8' }
             },
             pulse: {
-              '0%': { opacity: 0.3, transform: 'scale(1)' },
-              '70%': { opacity: 0.1, transform: 'scale(1.18)' },
+              '0%': { opacity: 0.2, transform: 'scale(1)' },
+              '70%': { opacity: 0.07, transform: 'scale(1.18)' },
               '100%': { opacity: 0, transform: 'scale(1.32)' }
             }
           },
@@ -49,34 +49,52 @@
     }
   </script>
 
-  <!-- ✅ أنماط إضافية بديلة عن inline styles -->
+  <!-- 🎥 تنسيقات الفيديو -->
   <style>
-    .digital-grid {
-      background-image:
-        repeating-linear-gradient(transparent 0px, #262b47 2px, transparent 24px),
-        repeating-linear-gradient(90deg, transparent 0px, #262b47 2px, transparent 24px);
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
     }
-    .pulse-delay-07 {
-      animation-delay: .7s;
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* ✅ ملء الشاشة */
     }
+    .pulse-delay-07 { animation-delay: .7s; }
   </style>
 </head>
-<body class="font-cairo bg-dark-bg text-gray-200 min-h-screen flex flex-col">
+<body class="font-cairo text-gray-200 min-h-screen relative">
+
+  <!-- 🎥 الفيديو كخلفية واضحة -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+  </div>
 
   <!-- ✅ الهيدر -->
-  <header class="relative h-96 overflow-hidden flex items-center justify-center text-center bg-gradient-to-br from-[#0f2027] to-[#1a3a4f]">
+  <header class="relative h-96 overflow-hidden flex items-center justify-center text-center">
     <!-- شبكة رقمية -->
-    <div class="absolute inset-0 opacity-20 digital-grid"></div>
+    <div class="absolute inset-0 opacity-20"
+         style="background-image:
+           repeating-linear-gradient(transparent 0px, #262b47 2px, transparent 24px),
+           repeating-linear-gradient(90deg, transparent 0px, #262b47 2px, transparent 24px);">
+    </div>
 
-    <!-- دوائر النبض -->
+    <!-- حلقات نبض -->
     <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse"></div>
     <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse pulse-delay-07"></div>
 
     <!-- المحتوى -->
     <div class="relative z-10 px-6">
       <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue animate-digital-glow font-orbitron">
-        SAU<span class="text-white">i</span>
-        <span class="border-2 border-neon-blue text-neon-blue px-2 rounded-md">C</span>ODE
+        SAU<span class="text-white">i</span><span class="border-2 border-neon-blue text-neon-blue px-2 rounded-md">C</span>ODE
       </h1>
       <div class="mt-4 flex justify-center gap-4 text-xs md:text-sm font-mono text-neon-blue">
         <span class="opacity-80">00110101</span>
@@ -86,19 +104,19 @@
 
       <!-- القائمة -->
       <nav class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href="{% url 'home' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+        <a href="{% url 'home' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
           <i class="fas fa-home"></i> الرئيسية
         </a>
-        <a href="{% url 'accounts:login' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+        <a href="{% url 'accounts:login' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
           <i class="fas fa-lock"></i> دخول
         </a>
-        <a href="{% url 'accounts:register' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+        <a href="{% url 'accounts:register' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
           <i class="fas fa-user-plus"></i> تسجيل
         </a>
-        <a href="{% url 'products:list' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+        <a href="{% url 'products:list' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
           <i class="fas fa-box-open"></i> المنتجات
         </a>
-        <a href="{% url 'orders:cart' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition-all">
+        <a href="{% url 'orders:cart' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
           <i class="fas fa-shopping-cart"></i> السلة
         </a>
       </nav>
@@ -106,17 +124,39 @@
   </header>
 
   <!-- ✅ المحتوى -->
-  <main class="flex-1">
-    {% block content %}{% endblock %}
+  <main class="container mx-auto px-6 py-12 relative z-10">
+    {% block content %}
+    <section class="hero max-w-4xl mx-auto text-center bg-gradient-to-br from-card-bg/80 to-blue-900/40 p-10 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/10">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        مرحبًا بك في عالم المنتجات الرقمية
+      </h2>
+      <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+        نوفر لك ملفات، دورات، تصاميم، وقوالب رقمية احترافية جاهزة للتحميل الفوري وسهلة الاستخدام.
+      </p>
+      <a href="{% url 'products:list' %}"
+         class="inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-full hover:from-blue-700 hover:to-cyan-600 transition transform hover:scale-105">
+        استعرض المنتجات
+      </a>
+    </section>
+    {% endblock %}
   </main>
 
   <!-- ✅ الفوتر -->
-  <footer class="bg-[#0b1525] text-gray-300 py-10 mt-12 border-t border-gray-700">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6">
+  <footer class="bg-gradient-to-b from-[#0f2027] to-[#1a3a4f] text-gray-300 pt-12 pb-6 mt-12 border-t border-gray-700 relative z-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-6 text-center">
 
-      <!-- معلومات الاتصال -->
-      <div class="space-y-3 text-center">
-        <h3 class="text-lg font-semibold text-white">اتصل بنا</h3>
+      <!-- وصف المنصة -->
+      <div class="space-y-3">
+        <h3 class="text-xl font-bold text-white">منصة الكود سعودي</h3>
+        <p class="text-sm leading-relaxed text-gray-400">
+          وجهتك الأولى للمنتجات الرقمية: دورات، قوالب، ملفات،  
+          وتصميمات احترافية من مطور سعودي.
+        </p>
+      </div>
+
+      <!-- اتصل بنا -->
+      <div class="space-y-3">
+        <h3 class="text-xl font-bold text-white">اتصل بنا</h3>
         <ul class="space-y-2 text-sm">
           <li class="flex items-center justify-center gap-2">
             <i class="fas fa-map-marker-alt text-cyan-400"></i>
@@ -124,51 +164,73 @@
           </li>
           <li class="flex items-center justify-center gap-2">
             <i class="fas fa-envelope text-cyan-400"></i>
-            <a href="mailto:saudicode586@gmail.com" class="hover:text-cyan-300 transition">saudicode586@gmail.com</a>
+            <a href="mailto:saudicode586@gmail.com" class="hover:text-cyan-300 transition">
+              saudicode586@gmail.com
+            </a>
           </li>
           <li class="flex items-center justify-center gap-2">
             <i class="fas fa-phone text-cyan-400"></i>
-            <a href="tel:+966594100055" class="hover:text-cyan-300 transition">+966-594100055</a>
+            <a href="tel:+966594100055" class="hover:text-cyan-300 transition">
+              +966-594100055
+            </a>
           </li>
           <li class="flex items-center justify-center gap-2">
             <i class="fas fa-globe text-cyan-400"></i>
-            <a href="https://www.saudicodes.com" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 transition">www.saudicodes.com</a>
+            <a href="https://www.saudicodes.com" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 transition">
+              www.saudicodes.com
+            </a>
           </li>
         </ul>
       </div>
 
-      <!-- وسائل التواصل -->
-      <div class="space-y-4 text-center">
-        <h3 class="text-lg font-semibold text-white">تابعنا</h3>
-        <div class="flex justify-center gap-4">
-          <a href="https://wa.me/966594100055" target="_blank" rel="noopener noreferrer" aria-label="واتساب" title="واتساب" class="text-2xl text-green-500 hover:scale-110 transition-transform duration-300">
+      <!-- تابعنا -->
+      <div class="space-y-3">
+        <h3 class="text-xl font-bold text-white">تابعنا</h3>
+        <div class="flex flex-row-reverse justify-center gap-3">
+
+          <a href="https://wa.me/966594100055" target="_blank" rel="noopener noreferrer" aria-label="واتساب" title="واتساب"
+             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#25D366] hover:text-white transition transform hover:scale-110">
             <i class="fab fa-whatsapp"></i>
           </a>
-          <a href="https://t.me/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="تيليجرام" title="تيليجرام" class="text-2xl text-blue-400 hover:scale-110 transition-transform duration-300">
+
+          <a href="https://t.me/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="تيليجرام" title="تيليجرام"
+             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#0088cc] hover:text-white transition transform hover:scale-110">
             <i class="fab fa-telegram"></i>
           </a>
-          <a href="https://www.snapchat.com/add/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="سناب شات" title="سناب شات" class="text-2xl text-yellow-400 hover:scale-110 transition-transform duration-300">
-            <i class="fab fa-snapchat-ghost"></i>
-          </a>
-          <a href="https://www.tiktok.com/@saudicode586" target="_blank" rel="noopener noreferrer" aria-label="تيك توك" title="تيك توك" class="text-2xl text-black hover:scale-110 transition-transform duration-300">
+
+          <a href="https://www.tiktok.com/@saudicode586" target="_blank" rel="noopener noreferrer" aria-label="تيك توك" title="تيك توك"
+             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-black hover:text-white transition transform hover:scale-110">
             <i class="fab fa-tiktok"></i>
           </a>
-          <a href="https://www.instagram.com/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام" title="إنستغرام" class="text-2xl text-pink-500 hover:scale-110 transition-transform duration-300">
+
+          <a href="https://www.snapchat.com/add/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="سناب شات" title="سناب شات"
+             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#FFFC00] hover:text-black transition transform hover:scale-110">
+            <i class="fab fa-snapchat-ghost"></i>
+          </a>
+
+          <a href="https://www.instagram.com/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام" title="إنستغرام"
+             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#E4405F] hover:text-white transition transform hover:scale-110">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="https://www.linkedin.com/in/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="لينكدإن" title="لينكدإن" class="text-2xl text-blue-600 hover:scale-110 transition-transform duration-300">
+
+          <a href="https://www.linkedin.com/in/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="لينكدإن" title="لينكدإن"
+             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#0077B5] hover:text-white transition transform hover:scale-110">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://twitter.com/saudicode58" target="_blank" rel="noopener noreferrer" aria-label="تويتر" title="تويتر" class="text-2xl text-blue-400 hover:scale-110 transition-transform duration-300">
+
+          <a href="https://twitter.com/saudicode58" target="_blank" rel="noopener noreferrer" aria-label="تويتر" title="تويتر"
+             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#1DA1F2] hover:text-white transition transform hover:scale-110">
             <i class="fab fa-twitter"></i>
           </a>
+
         </div>
       </div>
+
     </div>
 
     <!-- خط سفلي -->
-    <div class="text-center text-gray-500 text-sm mt-8 border-t border-gray-700 pt-4">
-      © 2025 منصة سعودي كود المنتجات الرقمية - جميع الحقوق محفوظة
+    <div class="text-center text-gray-500 text-sm mt-10 border-t border-gray-700 pt-4">
+      © 2025 جميع الحقوق محفوظة - منصة الكود سعودي
     </div>
   </footer>
 
