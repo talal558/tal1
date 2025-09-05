@@ -2,19 +2,19 @@ from pathlib import Path
 from decouple import config, Csv
 import os
 
-# المسار الأساسي للمشروع
+# 📌 المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# مفتاح التشفير السري (من ملف .env)
+# 📌 مفتاح التشفير السري (من ملف .env)
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dummy-key')
 
-# وضع التطوير / الإنتاج
+# 📌 وضع التطوير / الإنتاج
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-# المضيفون المسموح لهم
+# 📌 المضيفون المسموح لهم
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
 
-# التطبيقات المثبتة
+# 📌 التطبيقات المثبتة
 INSTALLED_APPS = [
     # Django apps
     'django.contrib.admin',
@@ -24,17 +24,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # تطبيقات محلية
+    # التطبيقات المحلية
     'accounts',
     'products',
     'orders',
 
-    # مكتبة رفع الملفات عبر Cloudinary
+    # مكتبات خارجية
     'cloudinary',
     'cloudinary_storage',
 ]
 
-# الميدلوير
+# 📌 الميدلوير
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -45,13 +45,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# 📌 روابط المشروع
 ROOT_URLCONF = 'tal1.urls'
 
-# إعدادات القوالب
+# 📌 إعدادات القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # القوالب الأساسية
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,11 +65,12 @@ TEMPLATES = [
     },
 ]
 
+# 📌 WSGI
 WSGI_APPLICATION = 'tal1.wsgi.application'
 
-# قاعدة البيانات
+# 📌 قاعدة البيانات
 if DEBUG:
-    # SQLite في التطوير
+    # SQLite للتطوير
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -76,7 +78,7 @@ if DEBUG:
         }
     }
 else:
-    # PostgreSQL في الإنتاج
+    # PostgreSQL للإنتاج
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -88,7 +90,7 @@ else:
         }
     }
 
-# التحقق من كلمات المرور
+# 📌 التحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -96,22 +98,22 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# الإعدادات الدولية
+# 📌 الإعدادات الدولية
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
 USE_I18N = True
 USE_TZ = True
 
-# إعدادات الملفات الثابتة
+# 📌 الملفات الثابتة (Static)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # ملفات التطوير
+STATIC_ROOT = BASE_DIR / 'staticfiles'    # ملفات التجميع collectstatic
 
-# إعدادات الوسائط
+# 📌 الملفات المرفوعة (Media)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# إعدادات Cloudinary
+# 📌 إعدادات Cloudinary (لرفع الصور والفيديوهات)
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='your_cloud_name'),
     'API_KEY': config('CLOUDINARY_API_KEY', default='your_api_key'),
@@ -119,5 +121,5 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# نوع الحقول التلقائية
+# 📌 نوع الحقول التلقائية
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

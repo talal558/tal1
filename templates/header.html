@@ -50,11 +50,40 @@
       }
     }
   </script>
+
+  <!-- 🎥 تنسيقات الفيديو -->
+  <style>
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(3px);   /* ✅ ضبابية خفيفة */
+      transform: scale(1.05); /* ✅ تكبير بسيط لتجنب حواف مشوشة */
+    }
+    .pulse-delay-07 { animation-delay: .7s; }
+  </style>
 </head>
-<body class="font-cairo bg-dark-bg text-gray-200 min-h-screen">
+<body class="font-cairo text-gray-200 min-h-screen relative">
+
+  <!-- 🎥 الفيديو كخلفية (بدون طبقة شفافة) -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+  </div>
 
   <!-- الشريط العلوي -->
-  <header class="relative h-96 overflow-hidden flex items-center justify-center text-center" style="background: linear-gradient(135deg, #0f2027 0%, #1a3a4f 100%);">
+  <header class="relative h-96 overflow-hidden flex items-center justify-center text-center">
     
     <!-- شبكة رقمية -->
     <div class="absolute inset-0 opacity-20"
@@ -65,7 +94,7 @@
 
     <!-- حلقات نبض -->
     <div class="absolute pulse w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse"></div>
-    <div class="absolute pulse w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse pulse-delay-07" style="animation-delay: 0.7s;"></div>
+    <div class="absolute pulse w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse pulse-delay-07"></div>
 
     <!-- المحتوى -->
     <div class="header-content relative z-10 px-6">
@@ -101,7 +130,7 @@
   </header>
 
   <!-- المحتوى الرئيسي -->
-  <main class="container mx-auto px-6 py-12">
+  <main class="container mx-auto px-6 py-12 relative z-10">
     <section class="hero max-w-4xl mx-auto text-center bg-gradient-to-br from-card-bg/80 to-blue-900/40 p-10 rounded-2xl shadow-2xl backdrop-blur-sm border border-white/10">
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
         مرحبًا بك في عالم المنتجات الرقمية
