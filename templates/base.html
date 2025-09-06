@@ -49,28 +49,40 @@
     }
   </script>
 
-  <!-- 🎥 تنسيقات الفيديو -->
+  <!-- 🎥 تنسيقات الفيديو + الأزرار المتحركة -->
   <style>
-    .video-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1;
-    }
-    .video-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* ✅ ملء الشاشة */
-    }
+    .video-bg {position: fixed;top: 0;left: 0;width: 100%;height: 100%;overflow: hidden;z-index: -1;}
+    .video-bg video {width: 100%;height: 100%;object-fit: cover;}
     .pulse-delay-07 { animation-delay: .7s; }
+
+    /* زر متحرك */
+    .button-container {position: relative;display:inline-block;margin: .5em;}
+    .button-border {padding: 3px;inset: 0;background: #0005;border-radius: inherit;
+      clip-path: path("M 90 0 C 121 0 126 5 126 33 C 126 61 121 66 90 66 L 33 66 C 5 66 0 0 33 0 Z");}
+    .button {justify-content: center;align-items: center;border: none;border-radius: 0.875em;
+      clip-path: path("M 90 0 C 115 0 120 5 120 30 C 120 55 115 60 90 60 L 30 60 C 5 60 0 55 0 30 C 0 5 5 0 30 0 Z");
+      width: 120px;height: 60px;background: #111215;display: flex;flex-direction: column;color: #fff;overflow: hidden;}
+    .real-button {position: absolute;width: 120px;height: 60px;z-index: 1;outline: none;border: none;border-radius: 17px;cursor: pointer;opacity: 0;}
+    .backdrop {position: absolute;inset: -9900%;background: radial-gradient(circle at 50% 50%,#0000 0,#0000 20%,#111111aa 50%);background-size: 3px 3px;z-index: -1;}
+    .spin {position: absolute;inset: 0;z-index: -2;opacity: 0.5;overflow: hidden;transition: 0.3s;}
+    .real-button:active ~ div .spin {opacity: 1;}
+    .spin-blur {filter: blur(2em);}
+    .spin-intense {inset: -0.125em;filter: blur(0.25em);border-radius: 0.75em;}
+    .spin-inside {inset: -2px;border-radius: inherit;filter: blur(2px);z-index: 0;}
+    .spin::before {content: "";position: absolute;inset: -150%;
+      animation:speen 8s cubic-bezier(0.56,0.15,0.28,0.86) infinite,woah 4s infinite;
+      animation-play-state: paused;}
+    .real-button:hover ~ div .spin::before {animation-play-state: running;}
+    .spin-blur::before {background: linear-gradient(90deg, #f50 30%, #0000 50%, #05f 70%);}
+    .spin-intense::before {background: linear-gradient(90deg, #f95 20%, #0000 45% 55%, #59f 80%);}
+    .spin-inside::before {background: linear-gradient(90deg, #fc9 30%, #0000 45% 55%, #9cf 70%);}
+    @keyframes speen {0% {rotate: 10deg;}50% {rotate: 190deg;}100% {rotate: 370deg;}}
+    @keyframes woah {0%,100% {scale: 1;}50% {scale: 0.75;}}
   </style>
 </head>
 <body class="font-cairo text-gray-200 min-h-screen relative">
 
-  <!-- 🎥 الفيديو كخلفية واضحة -->
+  <!-- 🎥 الفيديو كخلفية -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
@@ -104,21 +116,38 @@
 
       <!-- القائمة -->
       <nav class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href="{% url 'home' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
-          <i class="fas fa-home"></i> الرئيسية
-        </a>
-        <a href="{% url 'accounts:login' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
-          <i class="fas fa-lock"></i> دخول
-        </a>
-        <a href="{% url 'accounts:register' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
-          <i class="fas fa-user-plus"></i> تسجيل
-        </a>
-        <a href="{% url 'products:list' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
-          <i class="fas fa-box-open"></i> المنتجات
-        </a>
-        <a href="{% url 'orders:cart' %}" class="flex items-center gap-2 px-5 py-2.5 bg-black/30 text-white rounded-lg border border-white/20 hover:bg-black/60 hover:text-neon-blue transition">
-          <i class="fas fa-shopping-cart"></i> السلة
-        </a>
+        <!-- زر متحرك رئيسية -->
+        <div class="button-container">
+          <a href="{% url 'home' %}" class="real-button"></a>
+          <div class="button-border">
+            <div class="button">
+              <span><i class="fas fa-home"></i> الرئيسية</span>
+              <div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- زر متحرك دخول -->
+        <div class="button-container">
+          <a href="{% url 'accounts:login' %}" class="real-button"></a>
+          <div class="button-border">
+            <div class="button">
+              <span><i class="fas fa-lock"></i> دخول</span>
+              <div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- زر متحرك تسجيل -->
+        <div class="button-container">
+          <a href="{% url 'accounts:register' %}" class="real-button"></a>
+          <div class="button-border">
+            <div class="button">
+              <span><i class="fas fa-user-plus"></i> تسجيل</span>
+              <div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div>
+            </div>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
@@ -141,7 +170,7 @@
     {% endblock %}
   </main>
 
-  <!-- ✅ الفوتر -->
+  <!-- ✅ الفوتر (نفس الأزرار المتحركة) -->
   <footer class="bg-gradient-to-b from-[#0f2027] to-[#1a3a4f] text-gray-300 pt-12 pb-6 mt-12 border-t border-gray-700 relative z-10">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-6 text-center">
 
@@ -158,77 +187,41 @@
       <div class="space-y-3">
         <h3 class="text-xl font-bold text-white">اتصل بنا</h3>
         <ul class="space-y-2 text-sm">
-          <li class="flex items-center justify-center gap-2">
-            <i class="fas fa-map-marker-alt text-cyan-400"></i>
-            الأحساء - المملكة العربية السعودية
-          </li>
-          <li class="flex items-center justify-center gap-2">
-            <i class="fas fa-envelope text-cyan-400"></i>
-            <a href="mailto:saudicode586@gmail.com" class="hover:text-cyan-300 transition">
-              saudicode586@gmail.com
-            </a>
-          </li>
-          <li class="flex items-center justify-center gap-2">
-            <i class="fas fa-phone text-cyan-400"></i>
-            <a href="tel:+966594100055" class="hover:text-cyan-300 transition">
-              +966-594100055
-            </a>
-          </li>
-          <li class="flex items-center justify-center gap-2">
-            <i class="fas fa-globe text-cyan-400"></i>
-            <a href="https://www.saudicodes.com" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 transition">
-              www.saudicodes.com
-            </a>
-          </li>
+          <li><i class="fas fa-map-marker-alt text-cyan-400"></i> الأحساء - المملكة العربية السعودية</li>
+          <li><i class="fas fa-envelope text-cyan-400"></i> <a href="mailto:saudicode586@gmail.com">saudicode586@gmail.com</a></li>
+          <li><i class="fas fa-phone text-cyan-400"></i> <a href="tel:+966594100055">+966-594100055</a></li>
+          <li><i class="fas fa-globe text-cyan-400"></i> <a href="https://www.saudicodes.com">www.saudicodes.com</a></li>
         </ul>
       </div>
 
       <!-- تابعنا -->
       <div class="space-y-3">
         <h3 class="text-xl font-bold text-white">تابعنا</h3>
-        <div class="flex flex-row-reverse justify-center gap-3">
-
-          <a href="https://wa.me/966594100055" target="_blank" rel="noopener noreferrer" aria-label="واتساب" title="واتساب"
-             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#25D366] hover:text-white transition transform hover:scale-110">
-            <i class="fab fa-whatsapp"></i>
-          </a>
-
-          <a href="https://t.me/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="تيليجرام" title="تيليجرام"
-             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#0088cc] hover:text-white transition transform hover:scale-110">
-            <i class="fab fa-telegram"></i>
-          </a>
-
-          <a href="https://www.tiktok.com/@saudicode586" target="_blank" rel="noopener noreferrer" aria-label="تيك توك" title="تيك توك"
-             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-black hover:text-white transition transform hover:scale-110">
-            <i class="fab fa-tiktok"></i>
-          </a>
-
-          <a href="https://www.snapchat.com/add/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="سناب شات" title="سناب شات"
-             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#FFFC00] hover:text-black transition transform hover:scale-110">
-            <i class="fab fa-snapchat-ghost"></i>
-          </a>
-
-          <a href="https://www.instagram.com/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام" title="إنستغرام"
-             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#E4405F] hover:text-white transition transform hover:scale-110">
-            <i class="fab fa-instagram"></i>
-          </a>
-
-          <a href="https://www.linkedin.com/in/saudicode586" target="_blank" rel="noopener noreferrer" aria-label="لينكدإن" title="لينكدإن"
-             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#0077B5] hover:text-white transition transform hover:scale-110">
-            <i class="fab fa-linkedin"></i>
-          </a>
-
-          <a href="https://twitter.com/saudicode58" target="_blank" rel="noopener noreferrer" aria-label="تويتر" title="تويتر"
-             class="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#1DA1F2] hover:text-white transition transform hover:scale-110">
-            <i class="fab fa-twitter"></i>
-          </a>
-
+        <div class="flex flex-wrap justify-center gap-3">
+          <!-- زر واتساب -->
+          <div class="button-container">
+            <a href="https://wa.me/966594100055" target="_blank" class="real-button"></a>
+            <div class="button-border"><div class="button"><span><i class="fab fa-whatsapp"></i> واتساب</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          </div>
+          <!-- زر تيليجرام -->
+          <div class="button-container">
+            <a href="https://t.me/saudicode586" target="_blank" class="real-button"></a>
+            <div class="button-border"><div class="button"><span><i class="fab fa-telegram"></i> تيليجرام</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          </div>
+          <!-- زر إنستغرام -->
+          <div class="button-container">
+            <a href="https://www.instagram.com/saudicode586" target="_blank" class="real-button"></a>
+            <div class="button-border"><div class="button"><span><i class="fab fa-instagram"></i> إنستغرام</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          </div>
+          <!-- زر تويتر -->
+          <div class="button-container">
+            <a href="https://twitter.com/saudicode58" target="_blank" class="real-button"></a>
+            <div class="button-border"><div class="button"><span><i class="fab fa-twitter"></i> تويتر</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          </div>
         </div>
       </div>
 
     </div>
-
-    <!-- خط سفلي -->
     <div class="text-center text-gray-500 text-sm mt-10 border-t border-gray-700 pt-4">
       © 2025 جميع الحقوق محفوظة - منصة الكود سعودي
     </div>
