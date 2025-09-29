@@ -4,50 +4,58 @@
 {% block title %}منصة سعودي كود - الرئيسية{% endblock %}
 
 {% block content %}
-  <!-- ✅ القسم الترحيبي (Hero Section) -->
-  <section class="relative text-center py-20">
-    <!-- شبكة رقمية -->
-    <div class="absolute inset-0 opacity-20 digital-grid"></div>
+<!-- ✅ خلفية الفيديو -->
+<div class="video-background">
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
+    متصفحك لا يدعم الفيديو.
+  </video>
+</div>
 
-    <!-- عنوان رئيسي -->
-    <h2 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue animate-digital-glow font-orbitron relative z-10">
-      مرحبًا بك في <span class="text-neon-blue">سعودي كود</span>
-    </h2>
+<!-- ✅ القسم الترحيبي (Hero Section) -->
+<section class="relative text-center py-20 z-10">
+  <!-- شبكة رقمية -->
+  <div class="absolute inset-0 opacity-20 digital-grid"></div>
 
-    <!-- وصف -->
-    <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto relative z-10">
-      منصتك المتكاملة لبيع وشراء المنتجات الرقمية — قوالب، تصميمات، وأدوات برمجية بجودة عالية.
-    </p>
+  <!-- عنوان رئيسي -->
+  <h2 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue animate-digital-glow font-orbitron relative z-10">
+    مرحبًا بك في <span class="text-neon-blue">سعودي كود</span>
+  </h2>
 
-    <!-- أزرار -->
-    <div class="mt-10 flex flex-wrap justify-center gap-4 relative z-10">
-      <!-- زر تصفح المنتجات -->
-      <div class="button-container">
-        <a href="{% url 'products:list' %}" class="real-button" title="تصفح المنتجات"></a>
-        <div class="button-border">
-          <div class="button">
-            <span><i class="fa-solid fa-box-open"></i> تصفح المنتجات</span>
-            <div class="backdrop"></div>
-            <div class="spin spin-blur"></div>
-            <div class="spin spin-intense"></div>
-            <div class="spin spin-inside"></div>
-          </div>
-        </div>
-      </div>
+  <!-- وصف -->
+  <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto relative z-10">
+    منصتك المتكاملة لبيع وشراء المنتجات الرقمية — قوالب، تصميمات، وأدوات برمجية بجودة عالية.
+  </p>
 
-      <!-- زر إنشاء حساب -->
-      <div class="button-container">
-        <a href="{% url 'accounts:register' %}" class="real-button" title="إنشاء حساب"></a>
-        <div class="button-border">
-          <div class="button">
-            <span><i class="fa-solid fa-user-plus"></i> أنشئ حسابك</span>
-            <div class="backdrop"></div>
-            <div class="spin spin-blur"></div>
-            <div class="spin spin-intense"></div>
-            <div class="spin spin-inside"></div>
-          </div>
+  <!-- أزرار -->
+  <div class="mt-10 flex flex-wrap justify-center gap-4 relative z-10">
+    <!-- زر تصفح المنتجات -->
+    <div class="button-container">
+      <a href="{% url 'products:list' %}" class="real-button" title="تصفح المنتجات"></a>
+      <div class="button-border">
+        <div class="button">
+          <span><i class="fa-solid fa-box-open"></i> تصفح المنتجات</span>
+          <div class="backdrop"></div>
+          <div class="spin spin-blur"></div>
+          <div class="spin spin-intense"></div>
+          <div class="spin spin-inside"></div>
         </div>
       </div>
     </div>
-  </section>
+
+    <!-- زر إنشاء حساب -->
+    <div class="button-container">
+      <a href="{% url 'accounts:register' %}" class="real-button" title="إنشاء حساب"></a>
+      <div class="button-border">
+        <div class="button">
+          <span><i class="fa-solid fa-user-plus"></i> أنشئ حسابك</span>
+          <div class="backdrop"></div>
+          <div class="spin spin-blur"></div>
+          <div class="spin spin-intense"></div>
+          <div class="spin spin-inside"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

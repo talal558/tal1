@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <!-- ✅ ترميز وعرض -->
+  <!-- ✅ إعدادات أساسية -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a1c26" />
+
   <title>{% block title %}منصة سعودي كود المنتجات الرقمية{% endblock %}</title>
 
   <!-- ✅ خطوط وأيقونات -->
@@ -49,14 +50,32 @@
     }
   </script>
 
-  <!-- ✅ تنسيقات إضافية -->
+  <!-- ✅ تنسيقات الفيديو -->
+  <style>
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1; /* الفيديو خلف المحتوى */
+    }
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* يغطي الشاشة بالكامل */
+    }
+  </style>
+
+  <!-- ✅ ملف CSS المخصص -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body class="font-cairo text-gray-200 min-h-screen relative bg-dark-bg">
 
-  <!-- 🎥 خلفية الفيديو -->
+  <!-- 🎥 الفيديو كخلفية -->
   <div class="video-bg">
-    <video autoplay muted loop>
+    <video autoplay muted loop playsinline>
       <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
       متصفحك لا يدعم تشغيل الفيديو.
     </video>
@@ -85,31 +104,71 @@
         <!-- الرئيسية -->
         <div class="button-container">
           <a href="{% url 'home' %}" class="real-button" title="الصفحة الرئيسية"></a>
-          <div class="button-border"><div class="button"><span><i class="fa-solid fa-home"></i> الرئيسية</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          <div class="button-border">
+            <div class="button">
+              <span><i class="fa-solid fa-home"></i> الرئيسية</span>
+              <div class="backdrop"></div>
+              <div class="spin spin-blur"></div>
+              <div class="spin spin-intense"></div>
+              <div class="spin spin-inside"></div>
+            </div>
+          </div>
         </div>
 
         <!-- دخول -->
         <div class="button-container">
           <a href="{% url 'accounts:login' %}" class="real-button" title="تسجيل الدخول"></a>
-          <div class="button-border"><div class="button"><span><i class="fa-solid fa-lock"></i> دخول</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          <div class="button-border">
+            <div class="button">
+              <span><i class="fa-solid fa-lock"></i> دخول</span>
+              <div class="backdrop"></div>
+              <div class="spin spin-blur"></div>
+              <div class="spin spin-intense"></div>
+              <div class="spin spin-inside"></div>
+            </div>
+          </div>
         </div>
 
         <!-- تسجيل -->
         <div class="button-container">
           <a href="{% url 'accounts:register' %}" class="real-button" title="إنشاء حساب"></a>
-          <div class="button-border"><div class="button"><span><i class="fa-solid fa-user-plus"></i> تسجيل</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          <div class="button-border">
+            <div class="button">
+              <span><i class="fa-solid fa-user-plus"></i> تسجيل</span>
+              <div class="backdrop"></div>
+              <div class="spin spin-blur"></div>
+              <div class="spin spin-intense"></div>
+              <div class="spin spin-inside"></div>
+            </div>
+          </div>
         </div>
 
         <!-- المنتجات -->
         <div class="button-container">
           <a href="{% url 'products:list' %}" class="real-button" title="قائمة المنتجات"></a>
-          <div class="button-border"><div class="button"><span><i class="fa-solid fa-box-open"></i> المنتجات</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          <div class="button-border">
+            <div class="button">
+              <span><i class="fa-solid fa-box-open"></i> المنتجات</span>
+              <div class="backdrop"></div>
+              <div class="spin spin-blur"></div>
+              <div class="spin spin-intense"></div>
+              <div class="spin spin-inside"></div>
+            </div>
+          </div>
         </div>
 
         <!-- السلة -->
         <div class="button-container">
           <a href="{% url 'orders:cart' %}" class="real-button" title="سلة المشتريات"></a>
-          <div class="button-border"><div class="button"><span><i class="fa-solid fa-cart-shopping"></i> السلة</span><div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div></div></div>
+          <div class="button-border">
+            <div class="button">
+              <span><i class="fa-solid fa-cart-shopping"></i> السلة</span>
+              <div class="backdrop"></div>
+              <div class="spin spin-blur"></div>
+              <div class="spin spin-intense"></div>
+              <div class="spin spin-inside"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
