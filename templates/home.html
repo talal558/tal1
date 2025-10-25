@@ -5,17 +5,17 @@
 
 {% block content %}
 <!-- ✅ خلفية الفيديو -->
-<div class="video-background">
-  <video autoplay muted loop playsinline id="bg-video">
+<div class="video-background fixed top-0 left-0 w-full h-full overflow-hidden -z-10">
+  <video autoplay muted loop playsinline id="bg-video" class="w-full h-full object-cover">
     <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
     متصفحك لا يدعم الفيديو.
   </video>
 </div>
 
 <!-- ✅ القسم الترحيبي (Hero Section) -->
-<section class="relative text-center py-20 z-10">
-  <!-- شبكة رقمية -->
-  <div class="absolute inset-0 opacity-20 digital-grid"></div>
+<section class="relative text-center py-24 px-6 md:py-32 z-10">
+  <!-- شبكة رقمية خلفية -->
+  <div class="absolute inset-0 opacity-15 pointer-events-none digital-grid"></div>
 
   <!-- عنوان رئيسي -->
   <h2 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue animate-digital-glow font-orbitron relative z-10">
@@ -23,8 +23,8 @@
   </h2>
 
   <!-- وصف -->
-  <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto relative z-10">
-    منصتك المتكاملة لبيع وشراء المنتجات الرقمية — قوالب، تصميمات، وأدوات برمجية بجودة عالية.
+  <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed relative z-10">
+    منصتك المتكاملة لبيع وشراء المنتجات الرقمية — قوالب، تصميمات، وأدوات برمجية بجودة عالية وبأسلوب عصري.
   </p>
 
   <!-- أزرار -->
@@ -55,6 +55,34 @@
           <div class="spin spin-inside"></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ قسم مميزات المنصة -->
+<section class="py-20 bg-card-bg bg-opacity-30 backdrop-blur-lg text-center text-gray-100 relative z-10">
+  <h3 class="text-3xl font-bold text-neon-blue mb-8 font-orbitron">مميزات سعودي كود</h3>
+
+  <div class="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto px-6">
+    <!-- بطاقة 1 -->
+    <div class="p-6 bg-dark-bg rounded-2xl border border-neon-blue/40 shadow-lg hover:shadow-neon-blue/30 transition">
+      <i class="fa-solid fa-bolt text-neon-blue text-4xl mb-4"></i>
+      <h4 class="text-xl font-semibold mb-2">سرعة وأداء</h4>
+      <p class="text-gray-400 text-sm leading-relaxed">منصة مبنية بتقنيات حديثة تضمن سرعة تحميل عالية وتجربة استخدام سلسة.</p>
+    </div>
+
+    <!-- بطاقة 2 -->
+    <div class="p-6 bg-dark-bg rounded-2xl border border-neon-blue/40 shadow-lg hover:shadow-neon-blue/30 transition">
+      <i class="fa-solid fa-shield-halved text-neon-blue text-4xl mb-4"></i>
+      <h4 class="text-xl font-semibold mb-2">أمان وتوثيق</h4>
+      <p class="text-gray-400 text-sm leading-relaxed">نظام مصمم لحماية بيانات المستخدمين عبر تشفير قوي وتوثيق متقدم.</p>
+    </div>
+
+    <!-- بطاقة 3 -->
+    <div class="p-6 bg-dark-bg rounded-2xl border border-neon-blue/40 shadow-lg hover:shadow-neon-blue/30 transition">
+      <i class="fa-solid fa-hand-holding-dollar text-neon-blue text-4xl mb-4"></i>
+      <h4 class="text-xl font-semibold mb-2">بيع سهل وسريع</h4>
+      <p class="text-gray-400 text-sm leading-relaxed">ارفع منتجاتك الرقمية وابدأ البيع بسهولة عبر واجهة أنيقة وسهلة الاستخدام.</p>
     </div>
   </div>
 </section>

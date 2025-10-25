@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a1c26" />
 
-  <title>{% block title %}منصة سعودي كود المنتجات الرقمية{% endblock %}</title>
+  <title>{% block title %}منصة سعودي كود للمنتجات الرقمية{% endblock %}</title>
 
   <!-- ✅ خطوط وأيقونات -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,12 +59,12 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      z-index: -1; /* الفيديو خلف المحتوى */
+      z-index: -1;
     }
     .video-bg video {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* يغطي الشاشة بالكامل */
+      object-fit: cover;
     }
   </style>
 
@@ -85,7 +85,7 @@
   <header class="relative h-96 overflow-hidden flex items-center justify-center text-center">
     <!-- حلقات نبض -->
     <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse"></div>
-    <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse pulse-delay-07"></div>
+    <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse delay-700"></div>
 
     <!-- المحتوى -->
     <div class="header-content relative z-10 px-6">
@@ -95,18 +95,24 @@
 
       <div class="mt-4 flex justify-center gap-4 text-xs md:text-sm font-mono text-neon-blue">
         <span class="opacity-80">00110101</span>
-        <span class="tracking-wider">منصة سعودي كود المنتجات الرقمية</span>
+        <span class="tracking-wider">منصة سعودي كود للمنتجات الرقمية</span>
         <span class="opacity-80">01011010</span>
       </div>
 
       <!-- 🔹 أزرار متحركة -->
       <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <!-- الرئيسية -->
+        {% for btn in [
+          {'url': 'home', 'icon': 'fa-home', 'label': 'الرئيسية'},
+          {'url': 'accounts:login', 'icon': 'fa-lock', 'label': 'دخول'},
+          {'url': 'accounts:register', 'icon': 'fa-user-plus', 'label': 'تسجيل'},
+          {'url': 'products:list', 'icon': 'fa-box-open', 'label': 'المنتجات'},
+          {'url': 'orders:cart', 'icon': 'fa-cart-shopping', 'label': 'السلة'}
+        ] %}
         <div class="button-container">
-          <a href="{% url 'home' %}" class="real-button" title="الصفحة الرئيسية"></a>
+          <a href="{% url btn.url %}" class="real-button" title="{{ btn.label }}"></a>
           <div class="button-border">
             <div class="button">
-              <span><i class="fa-solid fa-home"></i> الرئيسية</span>
+              <span><i class="fa-solid {{ btn.icon }}"></i> {{ btn.label }}</span>
               <div class="backdrop"></div>
               <div class="spin spin-blur"></div>
               <div class="spin spin-intense"></div>
@@ -114,62 +120,7 @@
             </div>
           </div>
         </div>
-
-        <!-- دخول -->
-        <div class="button-container">
-          <a href="{% url 'accounts:login' %}" class="real-button" title="تسجيل الدخول"></a>
-          <div class="button-border">
-            <div class="button">
-              <span><i class="fa-solid fa-lock"></i> دخول</span>
-              <div class="backdrop"></div>
-              <div class="spin spin-blur"></div>
-              <div class="spin spin-intense"></div>
-              <div class="spin spin-inside"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- تسجيل -->
-        <div class="button-container">
-          <a href="{% url 'accounts:register' %}" class="real-button" title="إنشاء حساب"></a>
-          <div class="button-border">
-            <div class="button">
-              <span><i class="fa-solid fa-user-plus"></i> تسجيل</span>
-              <div class="backdrop"></div>
-              <div class="spin spin-blur"></div>
-              <div class="spin spin-intense"></div>
-              <div class="spin spin-inside"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- المنتجات -->
-        <div class="button-container">
-          <a href="{% url 'products:list' %}" class="real-button" title="قائمة المنتجات"></a>
-          <div class="button-border">
-            <div class="button">
-              <span><i class="fa-solid fa-box-open"></i> المنتجات</span>
-              <div class="backdrop"></div>
-              <div class="spin spin-blur"></div>
-              <div class="spin spin-intense"></div>
-              <div class="spin spin-inside"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- السلة -->
-        <div class="button-container">
-          <a href="{% url 'orders:cart' %}" class="real-button" title="سلة المشتريات"></a>
-          <div class="button-border">
-            <div class="button">
-              <span><i class="fa-solid fa-cart-shopping"></i> السلة</span>
-              <div class="backdrop"></div>
-              <div class="spin spin-blur"></div>
-              <div class="spin spin-intense"></div>
-              <div class="spin spin-inside"></div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </header>
@@ -181,6 +132,5 @@
 
   <!-- ✅ الفوتر -->
   {% include 'footer.html' %}
-
 </body>
 </html>
