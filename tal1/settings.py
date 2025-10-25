@@ -37,6 +37,15 @@ CSRF_TRUSTED_ORIGINS = config(
 )
 
 # =========================
+# التحقق من توفر Whitenoise (مرن)
+# =========================
+try:
+    import whitenoise  # noqa: F401
+    _WHITENOISE = True
+except Exception:
+    _WHITENOISE = False
+
+# =========================
 # التطبيقات المثبتة
 # =========================
 INSTALLED_APPS = [
@@ -59,14 +68,17 @@ INSTALLED_APPS = [
 ]
 
 # =========================
-# الميدلوير
+# الميدلوير (مع تفعيل Whitenoise فقط إذا متاح)
 # =========================
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+]
 
+if _WHITENOISE:
     # تقديم الملفات الثابتة بكفاءة في الإنتاج
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
 
+MIDDLEWARE += [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -156,8 +168,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']      # أثناء التطوير
 STATIC_ROOT = BASE_DIR / 'staticfiles'        # لـ collectstatic في الإنتاج
 
-# تفعيل تخزين Whitenoise المضغوط مع Manifest في الإنتاج فقط
-if not DEBUG:
+# تفعيل تخزين Whitenoise المضغوط مع Manifest في الإنتاج فقط إذا متاح
+if _WHITENOISE and not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # =========================
