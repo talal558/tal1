@@ -2,266 +2,189 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <!-- ✅ الإعدادات الأساسية -->
+  <!-- أساسيات -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0a1c26" />
-  <title>{% block title %}منصة سعودي كود للمنتجات الرقمية{% endblock %}</title>
+  <title>سعودي كود — الرئيسية</title>
 
-  <!-- ✅ خطوط وأيقونات -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+  <!-- خطوط وأيقونات -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
 
-  <!-- ✅ Tailwind CSS -->
+  <!-- Tailwind عبر CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            cairo: ['Cairo', 'sans-serif'],
-            orbitron: ['Orbitron', 'monospace'],
-          },
-          colors: {
-            'neon-blue': '#05d9e8',
-            'dark-bg': '#0f172a',
-            'card-bg': '#1e293b',
-          },
+          fontFamily: { cairo:['Cairo','sans-serif'], orbitron:['Orbitron','monospace'] },
+          colors: { 'neon-blue':'#05d9e8','dark-bg':'#0f172a','card-bg':'#111215' },
           keyframes: {
             'digital-glow': {
-              '0%, 100%': { textShadow: '0 0 10px #84d8fa, 0 0 20px #84d8fa, 0 0 30px #05d9e8' },
-              '50%': { textShadow: '0 0 20px white, 0 0 40px #05d9e8, 0 0 60px #05d9e8' }
+              '0%,100%':{ textShadow:'0 0 10px #84d8fa,0 0 20px #84d8fa,0 0 30px #05d9e8' },
+              '50%':{ textShadow:'0 0 20px #fff,0 0 40px #05d9e8,0 0 60px #05d9e8' }
             },
             pulse: {
-              '0%': { opacity: 0.2, transform: 'scale(1)' },
-              '70%': { opacity: 0.07, transform: 'scale(1.18)' },
-              '100%': { opacity: 0, transform: 'scale(1.32)' }
+              '0%':{opacity:.25,transform:'scale(1)'},
+              '70%':{opacity:.08,transform:'scale(1.18)'},
+              '100%':{opacity:0,transform:'scale(1.36)'}
             }
           },
           animation: {
-            'digital-glow': 'digital-glow 2s ease-in-out infinite',
-            'pulse': 'pulse 2s infinite linear',
+            'digital-glow':'digital-glow 2s ease-in-out infinite',
+            'pulse':'pulse 3s linear infinite'
           }
         }
       }
     }
   </script>
 
-  <!-- ✅ تنسيقات الفيديو والأزرار -->
+  <!-- خلفية الفيديو العامة + أزرار -->
   <style>
-    .video-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1;
-    }
+    .video-bg{position:fixed;inset:0;z-index:-10;overflow:hidden}
+    .video-bg video{width:100%;height:100%;object-fit:cover;filter:blur(3px) brightness(.55);transform:scale(1.05)}
 
-    .video-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: blur(3px);
-      transform: scale(1.05);
-    }
-
-    .pulse-delay-07 {
-      animation-delay: 0.7s;
-    }
-
-    /* ✅ الأزرار المتحركة */
-    .button-container {
-      position: relative;
-      display: inline-block;
-      margin: 0.5em;
-    }
-
-    .button-border {
-      padding: 3px;
-      inset: 0;
-      background: #0005;
-      border-radius: inherit;
-      clip-path: path("M 90 0 C 121 0 126 5 126 33 C 126 61 121 66 90 66 L 33 66 C 5 66 0 0 33 0 Z");
-    }
-
-    .button {
-      justify-content: center;
-      align-items: center;
-      border: none;
-      border-radius: 0.875em;
-      clip-path: path("M 90 0 C 115 0 120 5 120 30 C 120 55 115 60 90 60 L 30 60 C 5 60 0 55 0 30 C 0 5 5 0 30 0 Z");
-      width: 120px;
-      height: 60px;
-      background: #111215;
-      display: flex;
-      flex-direction: column;
-      color: #fff;
-      overflow: hidden;
-    }
-
-    .real-button {
-      position: absolute;
-      width: 120px;
-      height: 60px;
-      z-index: 1;
-      outline: none;
-      border: none;
-      border-radius: 17px;
-      cursor: pointer;
-      opacity: 0;
-    }
-
-    .backdrop {
-      position: absolute;
-      inset: -9900%;
-      background: radial-gradient(circle at 50% 50%, #0000 0, #0000 20%, #111111aa 50%);
-      background-size: 3px 3px;
-      z-index: -1;
-    }
-
-    .spin {
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      opacity: 0.5;
-      overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .real-button:active ~ div .spin {
-      opacity: 1;
-    }
-
-    .spin-blur {
-      filter: blur(2em);
-    }
-
-    .spin-intense {
-      inset: -0.125em;
-      filter: blur(0.25em);
-      border-radius: 0.75em;
-    }
-
-    .spin-inside {
-      inset: -2px;
-      border-radius: inherit;
-      filter: blur(2px);
-      z-index: 0;
-    }
-
-    .spin::before {
-      content: "";
-      position: absolute;
-      inset: -150%;
-      animation: speen 8s cubic-bezier(0.56, 0.15, 0.28, 0.86) infinite,
-        woah 4s infinite;
-      animation-play-state: paused;
-    }
-
-    .real-button:hover ~ div .spin::before {
-      animation-play-state: running;
-    }
-
-    .spin-blur::before {
-      background: linear-gradient(90deg, #f50 30%, #0000 50%, #05f 70%);
-    }
-
-    .spin-intense::before {
-      background: linear-gradient(90deg, #f95 20%, #0000 45% 55%, #59f 80%);
-    }
-
-    .spin-inside::before {
-      background: linear-gradient(90deg, #fc9 30%, #0000 45% 55%, #9cf 70%);
-    }
-
-    @keyframes speen {
-      0% {
-        rotate: 10deg;
-      }
-      50% {
-        rotate: 190deg;
-      }
-      100% {
-        rotate: 370deg;
-      }
-    }
-
-    @keyframes woah {
-      0%, 100% {
-        scale: 1;
-      }
-      50% {
-        scale: 0.75;
-      }
-    }
+    /* أزرار متحركة قديمة (كما تحب) */
+    .button-container{position:relative;display:inline-block;margin:.35rem}
+    .real-button{position:absolute;width:120px;height:48px;z-index:1;outline:none;border:none;border-radius:16px;cursor:pointer;opacity:0}
+    .button-border{padding:3px;inset:0;background:#0005;border-radius:16px;
+      clip-path:path("M 90 0 C 121 0 126 5 126 33 C 126 61 121 66 90 66 L 33 66 C 5 66 0 0 33 0 Z")}
+    .button{display:flex;justify-content:center;align-items:center;gap:.5rem;
+      width:120px;height:48px;border:none;border-radius:14px;background:#111215;color:#fff;overflow:hidden;
+      clip-path:path("M 90 0 C 115 0 120 5 120 30 C 120 55 115 60 90 60 L 30 60 C 5 60 0 55 0 30 C 0 5 5 0 30 0 Z")}
+    .backdrop{position:absolute;inset:-9900%;background:radial-gradient(circle at 50% 50%,#0000 0,#0000 20%,#111111aa 50%);background-size:3px 3px;z-index:-1}
+    .spin{position:absolute;inset:0;z-index:-2;opacity:.5;overflow:hidden;transition:.3s}
+    .real-button:active~div .spin{opacity:1}
+    .spin-blur{filter:blur(2em)}
+    .spin-intense{inset:-.125em;filter:blur(.25em);border-radius:.75em}
+    .spin-inside{inset:-2px;border-radius:inherit;filter:blur(2px);z-index:0}
+    .spin::before{content:"";position:absolute;inset:-150%;
+      animation:speen 8s cubic-bezier(.56,.15,.28,.86) infinite,woah 4s infinite;animation-play-state:paused}
+    .button-container:hover .spin::before{animation-play-state:running}
+    .spin-blur::before{background:linear-gradient(90deg,#f50 30%,#0000 50%,#05f 70%)}
+    .spin-intense::before{background:linear-gradient(90deg,#f95 20%,#0000 45% 55%,#59f 80%)}
+    .spin-inside::before{background:linear-gradient(90deg,#fc9 30%,#0000 45% 55%,#9cf 70%)}
+    @keyframes speen{0%{rotate:10deg}50%{rotate:190deg}100%{rotate:370deg}}
+    @keyframes woah{0%,100%{scale:1}50%{scale:.75}}
   </style>
 </head>
 
-<body class="font-cairo text-gray-200 min-h-screen relative bg-dark-bg">
+<body class="font-cairo text-gray-200 bg-dark-bg min-h-screen">
 
-  <!-- 🎥 خلفية الفيديو -->
+  <!-- خلفية الفيديو -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
-      متصفحك لا يدعم تشغيل الفيديو.
     </video>
   </div>
 
-  <!-- ✅ الهيدر -->
-  <header class="relative h-96 overflow-hidden flex items-center justify-center text-center">
-    <!-- حلقات نبض -->
-    <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse"></div>
-    <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse pulse-delay-07"></div>
+  <!-- هيدر بنفس روح صفحة الدخول -->
+  <header class="relative pt-16 pb-8 flex flex-col items-center text-center">
+    <!-- حلقة نبض حول الشعار -->
+    <div class="pointer-events-none absolute w-[26rem] h-[26rem] md:w-[32rem] md:h-[32rem] rounded-full border border-neon-blue/40 animate-pulse"></div>
 
-    <!-- المحتوى -->
-    <div class="header-content relative z-10 px-6">
-      <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue animate-digital-glow font-orbitron">
-        SAU<span class="text-white">i</span><span class="border-2 border-neon-blue text-neon-blue px-2 rounded-md">C</span>ODE
-      </h1>
+    <!-- الشعار المتوهّج -->
+    <h1 class="relative z-10 mt-6 text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue font-orbitron animate-digital-glow tracking-wider drop-shadow">
+      SAU<span class="text-white">i</span><span class="px-2 py-1 border-2 border-neon-blue text-neon-blue rounded-md">C</span>ODE
+    </h1>
+    <div class="mt-2 text-xs md:text-sm text-neon-blue/90 font-mono flex items-center gap-3">
+      <span class="opacity-80">00101101</span>
+      <span>منصة سعودي كود للمنتجات الرقمية</span>
+      <span class="opacity-80">00101101</span>
+    </div>
 
-      <div class="mt-4 flex justify-center gap-4 text-xs md:text-sm font-mono text-neon-blue">
-        <span class="opacity-80">00110101</span>
-        <span class="tracking-wider">منصة سعودي كود للمنتجات الرقمية</span>
-        <span class="opacity-80">01011010</span>
-      </div>
-
-      <!-- 🔹 الأزرار -->
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
-        {% for btn in [
-          {'url': 'home', 'icon': 'fa-home', 'label': 'الرئيسية'},
-          {'url': 'accounts:login', 'icon': 'fa-lock', 'label': 'دخول'},
-          {'url': 'accounts:register', 'icon': 'fa-user-plus', 'label': 'تسجيل'},
-          {'url': 'products:list', 'icon': 'fa-box-open', 'label': 'المنتجات'},
-          {'url': 'orders:cart', 'icon': 'fa-cart-shopping', 'label': 'السلة'}
-        ] %}
-        <div class="button-container">
-          <a href="{% url btn.url %}" class="real-button" title="{{ btn.label }}"></a>
-          <div class="button-border">
-            <div class="button">
-              <span><i class="fa-solid {{ btn.icon }}"></i> {{ btn.label }}</span>
-              <div class="backdrop"></div>
-              <div class="spin spin-blur"></div>
-              <div class="spin spin-intense"></div>
-              <div class="spin spin-inside"></div>
-            </div>
+    <!-- شريط الأزرار (كبسولات/الأسلوب القديم) -->
+    <div class="mt-5 flex flex-wrap justify-center">
+      <!-- الرئيسية -->
+      <div class="button-container">
+        <a href="{% url 'home' %}" class="real-button" title="الرئيسية"></a>
+        <div class="button-border">
+          <div class="button">
+            <i class="fa-solid fa-house"></i><span>الرئيسية</span>
+            <div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div>
           </div>
         </div>
-        {% endfor %}
+      </div>
+      <!-- دخول -->
+      <div class="button-container">
+        <a href="{% url 'accounts:login' %}" class="real-button" title="دخول"></a>
+        <div class="button-border">
+          <div class="button">
+            <i class="fa-solid fa-lock"></i><span>دخول</span>
+            <div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div>
+          </div>
+        </div>
+      </div>
+      <!-- تسجيل -->
+      <div class="button-container">
+        <a href="{% url 'accounts:register' %}" class="real-button" title="تسجيل"></a>
+        <div class="button-border">
+          <div class="button">
+            <i class="fa-solid fa-user-plus"></i><span>تسجيل</span>
+            <div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div>
+          </div>
+        </div>
+      </div>
+      <!-- المنتجات -->
+      <div class="button-container">
+        <a href="{% url 'products:list' %}" class="real-button" title="المنتجات"></a>
+        <div class="button-border">
+          <div class="button">
+            <i class="fa-solid fa-box-open"></i><span>المنتجات</span>
+            <div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div>
+          </div>
+        </div>
+      </div>
+      <!-- السلة -->
+      <div class="button-container">
+        <a href="{% url 'orders:cart' %}" class="real-button" title="السلة"></a>
+        <div class="button-border">
+          <div class="button">
+            <i class="fa-solid fa-cart-shopping"></i><span>السلة</span>
+            <div class="backdrop"></div><div class="spin spin-blur"></div><div class="spin spin-intense"></div><div class="spin spin-inside"></div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- ✅ المحتوى -->
-  <main class="container mx-auto px-6 py-12 relative z-10">
-    {% block content %}{% endblock %}
-  </main>
+  <!-- المحتوى: بطاقة ترحيب/منتجات -->
+  <section class="relative z-10 px-4 md:px-6 pb-12">
+    <div class="max-w-6xl mx-auto">
+      <div class="rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-neon-blue">
+          منتجاتنا الرقمية
+        </h2>
+        <p class="mt-4 text-gray-300">لا توجد منتجات حاليًا.</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- ✅ الفوتر -->
-  {% include 'footer.html' %}
+  <!-- الفوتر داخل نفس الملف -->
+  <footer class="relative z-10 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-bold mb-2">منصة الكود سعودي</h3>
+        <p class="text-gray-300 text-sm">وجهتك الأولى للمنتجات الرقمية؛ قوالب، ملفات، ودورات احترافية.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">اتصل بنا</h4>
+        <ul class="text-sm text-gray-300 space-y-1">
+          <li>الأحساء - المملكة العربية السعودية</li>
+          <li><a class="underline" href="mailto:saudicode586@gmail.com">saudicode586@gmail.com</a></li>
+          <li><a class="underline" href="tel:+966594100055">+966-594100055</a></li>
+          <li><a class="underline" href="https://www.saudicodes.com" target="_blank">www.saudicodes.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">تابعنا</h4>
+        <p class="text-gray-400 text-sm">© 2025 جميع الحقوق محفوظة — منصة الكود سعودي</p>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>

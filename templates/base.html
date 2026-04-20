@@ -2,20 +2,19 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <!-- ✅ إعدادات أساسية -->
+  <!-- إعدادات أساسية -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a1c26" />
-
   <title>{% block title %}منصة سعودي كود للمنتجات الرقمية{% endblock %}</title>
 
-  <!-- ✅ خطوط وأيقونات -->
+  <!-- خطوط وأيقونات -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
 
-  <!-- ✅ Tailwind CSS -->
+  <!-- Tailwind CSS عبر CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -50,30 +49,21 @@
     }
   </script>
 
-  <!-- ✅ تنسيقات الفيديو -->
+  <!-- تنسيقات الفيديو -->
   <style>
     .video-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      overflow: hidden; z-index: -1;
     }
-    .video-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .video-bg video { width: 100%; height: 100%; object-fit: cover; }
   </style>
 
-  <!-- ✅ ملف CSS المخصص -->
+  <!-- CSS المخصص (إن وجد) -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body class="font-cairo text-gray-200 min-h-screen relative bg-dark-bg">
 
-  <!-- 🎥 الفيديو كخلفية -->
+  <!-- 🎥 الخلفية بالفيديو -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="{% static 'videos/background.mp4' %}" type="video/mp4">
@@ -81,7 +71,7 @@
     </video>
   </div>
 
-  <!-- ✅ الهيدر -->
+  <!-- الهيدر -->
   <header class="relative h-96 overflow-hidden flex items-center justify-center text-center">
     <!-- حلقات نبض -->
     <div class="absolute w-96 h-96 border-2 border-neon-blue rounded-full animate-pulse"></div>
@@ -99,38 +89,38 @@
         <span class="opacity-80">01011010</span>
       </div>
 
-      <!-- 🔹 أزرار متحركة -->
+      <!-- أزرار متحركة (بدون for داخل القالب) -->
       <div class="mt-8 flex flex-wrap justify-center gap-3">
-        {% for btn in [
-          {'url': 'home', 'icon': 'fa-home', 'label': 'الرئيسية'},
-          {'url': 'accounts:login', 'icon': 'fa-lock', 'label': 'دخول'},
-          {'url': 'accounts:register', 'icon': 'fa-user-plus', 'label': 'تسجيل'},
-          {'url': 'products:list', 'icon': 'fa-box-open', 'label': 'المنتجات'},
-          {'url': 'orders:cart', 'icon': 'fa-cart-shopping', 'label': 'السلة'}
-        ] %}
-        <div class="button-container">
-          <a href="{% url btn.url %}" class="real-button" title="{{ btn.label }}"></a>
-          <div class="button-border">
-            <div class="button">
-              <span><i class="fa-solid {{ btn.icon }}"></i> {{ btn.label }}</span>
-              <div class="backdrop"></div>
-              <div class="spin spin-blur"></div>
-              <div class="spin spin-intense"></div>
-              <div class="spin spin-inside"></div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
+        <!-- الرئيسية -->
+        <a href="{% url 'home' %}" class="px-5 py-2 rounded-xl bg-card-bg/70 hover:bg-card-bg border border-neon-blue/40 shadow-lg transition">
+          <i class="fa-solid fa-home me-1"></i> الرئيسية
+        </a>
+        <!-- دخول -->
+        <a href="{% url 'accounts:login' %}" class="px-5 py-2 rounded-xl bg-card-bg/70 hover:bg-card-bg border border-neon-blue/40 shadow-lg transition">
+          <i class="fa-solid fa-lock me-1"></i> دخول
+        </a>
+        <!-- تسجيل -->
+        <a href="{% url 'accounts:register' %}" class="px-5 py-2 rounded-xl bg-card-bg/70 hover:bg-card-bg border border-neon-blue/40 shadow-lg transition">
+          <i class="fa-solid fa-user-plus me-1"></i> تسجيل
+        </a>
+        <!-- المنتجات -->
+        <a href="{% url 'products:list' %}" class="px-5 py-2 rounded-xl bg-card-bg/70 hover:bg-card-bg border border-neon-blue/40 shadow-lg transition">
+          <i class="fa-solid fa-box-open me-1"></i> المنتجات
+        </a>
+        <!-- السلة -->
+        <a href="{% url 'orders:cart' %}" class="px-5 py-2 rounded-xl bg-card-bg/70 hover:bg-card-bg border border-neon-blue/40 shadow-lg transition">
+          <i class="fa-solid fa-cart-shopping me-1"></i> السلة
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- ✅ المحتوى -->
+  <!-- المحتوى -->
   <main class="container mx-auto px-6 py-12 relative z-10">
     {% block content %}{% endblock %}
   </main>
 
-  <!-- ✅ الفوتر -->
+  <!-- الفوتر -->
   {% include 'footer.html' %}
 </body>
 </html>
